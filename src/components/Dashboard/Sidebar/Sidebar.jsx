@@ -76,7 +76,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Manage Users</span>
               </NavLink>
-              {/* Statistics */}
+              {/* Category */}
               <NavLink
                 to='category'
                 className={({ isActive }) =>
@@ -89,7 +89,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Category</span>
               </NavLink>
-              {/* Statistics */}
+              {/* Payment */}
               <NavLink
                 to='payment'
                 className={({ isActive }) =>
@@ -102,7 +102,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Payment</span>
               </NavLink>
-              {/* Statistics */}
+              {/* Sales Report */}
               <NavLink
                 to='salesReport'
                 className={({ isActive }) =>
@@ -115,7 +115,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Sales Report</span>
               </NavLink>
-              {/* Statistics */}
+              {/* Advertise */}
               <NavLink
                 to='advertise'
                 className={({ isActive }) =>

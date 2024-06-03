@@ -5,6 +5,11 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import DashboardLayout from "../layout/DashboardLayout";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import Category from "../Pages/Dashboard/Admin/Category";
+import Payment from "../Pages/Dashboard/Admin/Payment";
+import SalesReport from "../Pages/Dashboard/Admin/SalesReport";
+import Advertise from "../Pages/Dashboard/Admin/Advertise";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +34,28 @@ const router = createBrowserRouter([
     {
       path: "/dashboard",
       element: <DashboardLayout />,
+      children: [
+        {
+          path: "manageUsers",
+          element: <ManageUsers />,
+        },
+        {
+          path: "category",
+          element: <Category />,
+        },
+        {
+          path: "payment",
+          element: <Payment />,
+        },
+        {
+          path: "salesReport",
+          element: <SalesReport />,
+        },
+        {
+          path: "advertise",
+          element: <Advertise />,
+        },
+      ]
     },
   ]);
   export default router;
