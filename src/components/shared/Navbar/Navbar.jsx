@@ -7,7 +7,6 @@ import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
   const {user, logOut} = useContext(AuthContext);
-  console.log(user)
 
   const linkOption = (
     <div className=" lg:flex text-lg font-medium ">
@@ -94,7 +93,7 @@ const Navbar = () => {
                 <Link className="justify-between">Update Profile</Link>
               </li>
               <li>
-                <Link to="dashboard">Dashboard</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
                 <button 

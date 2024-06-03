@@ -22,8 +22,6 @@ const Login = () => {
   const onSubmit = async (data) => {
     const { email, password } = data;
 
-    console.log(email, password);
-
     try {
       setLoading(true);
 

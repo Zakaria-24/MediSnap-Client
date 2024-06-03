@@ -217,13 +217,11 @@ const Register = () => {
     const email = form.email.value
     const password = form.password.value
     const photoURL = form.photoURL.files[0]
-    console.log(fullName)
 
     try {
       setLoading(true)
       // 1. Upload image and get image url
       const image_url = await imageUpload(photoURL)
-      console.log(image_url)
       //2. User Registration
       const result = await createUser(email, password)
       console.log(result)
@@ -273,6 +271,14 @@ const Register = () => {
                 data-temp-mail-org='0'
               />
             </div>
+            {/* Role (User or Seller) */}
+            {/* <div>
+            <select className="select select-success w-full max-w-xs">
+  <option disabled selected>Select Role</option>
+  <option>User</option>
+  <option>Seller</option>
+</select>
+            </div> */}
             <div>
               <label htmlFor='photoURL' className='block mb-2 text-sm'>
                 Select Image:
