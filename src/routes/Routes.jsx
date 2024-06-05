@@ -10,6 +10,12 @@ import Category from "../Pages/Dashboard/Admin/Category";
 import Payment from "../Pages/Dashboard/Admin/Payment";
 import SalesReport from "../Pages/Dashboard/Admin/SalesReport";
 import Advertise from "../Pages/Dashboard/Admin/Advertise";
+import ManageMedicines from "../Pages/Dashboard/Seller/ManageMedicines";
+import PaymentHistory from "../Pages/Dashboard/Seller/PaymentHistory";
+import AskForAdvertisement from "../Pages/Dashboard/Seller/AskForAdvertisement";
+import UserPaymentHistory from "../Pages/Dashboard/User/UserPaymentHistory";
+import Shop from "../Pages/Shop/Shop";
+import Cart from "../Pages/Cart/Cart";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +26,15 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home />,
-        }
+        },
+        {
+            path: "/shop",
+            element: <Shop />,
+        },
+        {
+            path: "/shopCard",
+            element: <Cart />,
+        },
       ]
     },
     {
@@ -54,6 +68,24 @@ const router = createBrowserRouter([
         {
           path: "advertise",
           element: <Advertise />,
+        },
+        // sales routes
+        {
+          path: "manageMedicines",
+          element: <ManageMedicines />,
+        },
+        {
+          path: "paymentHistory",
+          element: <PaymentHistory />,
+        },
+        {
+          path: "askForAdvertisement",
+          element: <AskForAdvertisement />,
+        },
+        // user
+        {
+          path: "userPaymentHistory",
+          element: <UserPaymentHistory />,
         },
       ]
     },

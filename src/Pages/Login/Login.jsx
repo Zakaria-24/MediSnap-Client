@@ -6,11 +6,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
+import { axiosCommon } from "../../hooks/useAxiosCommon";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signInWithGoogle, signIn, loading, setLoading } =
+  const { signInWithGoogle, signIn, loading, setLoading, setUser } =
     useContext(AuthContext);
 
   const {
@@ -36,18 +37,20 @@ const Login = () => {
     }
   };
 
-  // handle google signin
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-
-      navigate(location?.state || "/");
-      toast.success("Signup Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
-  };
+     // google login
+     const handleGoogleSignIn = () => {
+      signInWithGoogle()
+      .then((result) => {
+        setUser(result.user);
+        const {displayName, email, photoURL} = result.user;
+        const userData = {displayName, email, photoURL, role:"user"}
+        console.log(userData);
+        toast.success("Google Login Successfully with added userData");
+        navigate("/");
+        //   Post request to server
+        axiosCommon.post(`/user`, userData)
+      });
+    };
 
   return (
     <>
@@ -123,13 +126,6 @@ const Login = () => {
                       <label htmlFor="password" className="text-sm">
                         Password
                       </label>
-                      <a
-                        rel="noopener noreferrer"
-                        href="#"
-                        className="text-xs hover:underline dark:text-gray-600"
-                      >
-                        Forgot password?
-                      </a>
                     </div>
                     <input
                       type="password"

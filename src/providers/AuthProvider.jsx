@@ -12,12 +12,15 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
+import axios from 'axios'
+// import useAxiosCommon from '../hooks/useAxiosCommon'
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
+  // const axiosCommon = useAxiosCommon()
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -31,13 +34,17 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     setLoading(true)
+    // await axiosCommon.post('/user', user)
     return signInWithPopup(auth, googleProvider)
   }
 
   const logOut = async () => {
     setLoading(true)
+    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    })
     return signOut(auth)
   }
 
@@ -48,11 +55,23 @@ const AuthProvider = ({ children }) => {
     })
   }
 
+   // Get token from server
+   const getToken = async email => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/jwt`,
+      { email },
+      { withCredentials: true }
+    )
+    return data
+  }
+
 
   // onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // axiosCommon.post('/user', user)
       if (currentUser) {
+        getToken(currentUser.email)
         setUser(currentUser);
       } else {
         setUser(null);
@@ -66,6 +85,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    setUser,
     loading,
     setLoading,
     createUser,

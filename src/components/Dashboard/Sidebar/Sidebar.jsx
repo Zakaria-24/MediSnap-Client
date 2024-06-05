@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
 import { FcAdvertising, FcSettings } from 'react-icons/fc'
-import { AiOutlineBars } from 'react-icons/ai'
+import { AiFillMedicineBox, AiOutlineBars } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
@@ -100,7 +100,7 @@ const Sidebar = () => {
               >
                 <TbPaywall className='w-5 h-5' />
 
-                <span className='mx-4 font-medium'>Payment</span>
+                <span className='mx-4 font-medium'>Payment Management</span>
               </NavLink>
               {/* Sales Report */}
               <NavLink
@@ -127,6 +127,64 @@ const Sidebar = () => {
                 <FcAdvertising className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'>Advertise</span>
+              </NavLink>
+
+              {/* Salers Menu */}
+
+ {/* Manage Medicines */}
+              <NavLink
+                to='manageMedicines'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <AiFillMedicineBox className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Manage Medicines</span>
+              </NavLink>
+ {/* Payment History */}
+              <NavLink
+                to='paymentHistory'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <TbPaywall className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Payment History</span>
+              </NavLink>
+ {/* Ask For Advertisement */}
+              <NavLink
+                to='askForAdvertisement'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <FcAdvertising className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Ask For Advertisement</span>
+              </NavLink>
+
+              {/* User Menu */}
+
+               {/* Payment History */}
+               <NavLink
+                to='userPaymentHistory'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <TbPaywall className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>User Payment History</span>
               </NavLink>
 
             </nav>

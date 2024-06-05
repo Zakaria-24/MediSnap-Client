@@ -1,10 +1,19 @@
+import Carousel from "./SliderSection/Carousel";
 
 
 const Home = () => {
     return (
-        <div>
-            <h1>home</h1>
-        </div>
+        <>
+            {/* slider */}
+            <Carousel/>
+
+            {/* Category Card Section */}
+
+            {/* Discount products */}
+
+
+            {/*  two extra sections */}
+        </>
     );
 };
 
