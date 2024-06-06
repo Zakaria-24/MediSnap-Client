@@ -16,6 +16,8 @@ import AskForAdvertisement from "../Pages/Dashboard/Seller/AskForAdvertisement";
 import UserPaymentHistory from "../Pages/Dashboard/User/UserPaymentHistory";
 import Shop from "../Pages/Shop/Shop";
 import Cart from "../Pages/Cart/Cart";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import SellerHome from "../Pages/Dashboard/Seller/SellerHome";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +51,11 @@ const router = createBrowserRouter([
       path: "/dashboard",
       element: <DashboardLayout />,
       children: [
+        // Admin Dash
+        {
+          path: "adminHome",
+          element: <AdminHome />,
+        },
         {
           path: "manageUsers",
           element: <ManageUsers />,
@@ -70,6 +77,10 @@ const router = createBrowserRouter([
           element: <Advertise />,
         },
         // sales routes
+        {
+          path: "sellerHome",
+          element: <SellerHome />,
+        },
         {
           path: "manageMedicines",
           element: <ManageMedicines />,
