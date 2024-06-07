@@ -12,8 +12,8 @@ import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utils";
 
 import { useForm } from "react-hook-form";
-import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageMedicines = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,11 +24,11 @@ const ManageMedicines = () => {
     setIsOpen(false);
   };
 
-  const axiosCommon = useAxiosCommon()
+  const axiosSecure = useAxiosSecure()
 
   const { mutateAsync } = useMutation({
     mutationFn: async medicineData => {
-      const { data } = await axiosCommon.post(`/medicine`, medicineData, )
+      const { data } = await axiosSecure.post(`/medicine`, medicineData, )
       return data
     },
     onSuccess: () => {
