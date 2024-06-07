@@ -181,7 +181,7 @@ const Register = () => {
                     <select
                       name="role"
                       {...register("role", { required: true })}
-                      className="select select-success w-full max-w-xs"
+                      className="select select-success w-full"
                     >
                       <option disabled selected>
                         Select Role
