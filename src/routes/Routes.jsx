@@ -6,7 +6,6 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import DashboardLayout from "../layout/DashboardLayout";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
-import Category from "../Pages/Dashboard/Admin/Category";
 import Payment from "../Pages/Dashboard/Admin/Payment";
 import SalesReport from "../Pages/Dashboard/Admin/SalesReport";
 import Advertise from "../Pages/Dashboard/Admin/Advertise";
@@ -21,6 +20,7 @@ import SellerHome from "../Pages/Dashboard/Seller/SellerHome";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 import AdminRoute from "./AdminRoute";
+import ManageCategory from "../Pages/Dashboard/Admin/ManageCategory";
 
 const router = createBrowserRouter([
   {
@@ -88,13 +88,13 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <Category />,
+              <ManageCategory />,
             </AdminRoute>
           </PrivateRoute>
         ),
       },
       {
-        path: "payment",
+        path: "paymentManagement",
         element: (
           <PrivateRoute>
             <AdminRoute>
