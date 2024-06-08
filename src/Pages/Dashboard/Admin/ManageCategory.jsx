@@ -66,6 +66,7 @@ const ManageCategory = () => {
       return data;
     },
     onSuccess: () => {
+      refetch()
       toast.success("Medicine Category Added Successfully!");
     },
     onError: (err) => {
@@ -120,27 +121,28 @@ const ManageCategory = () => {
   });
 
   //   delete
-  // const { mutateAsync: medicines } = useMutation({
-  //   mutationFn: async id => {
-  //     const { data } = await axiosSecure.delete(`/room/${id}`)
-  //     return data
-  //   },
-  //   onSuccess: data => {
-  //     console.log(data)
-  //     refetch()
-  //     toast.success('Successfully deleted.')
-  //   },
-  // })
+  const { mutateAsync: category } = useMutation({
+    mutationFn: async id => {
+      const { data } = await axiosSecure.delete(`/category/${id}`)
+      return data
+    },
+    onSuccess: data => {
+      console.log(data)
+      refetch()
+      toast.success('Successfully deleted.')
+      console.log("delete")
+    },
+  })
 
-  // //  Handle Delete
-  // const handleDelete = async id => {
-  //   console.log(id)
-  //   try {
-  //     await medicines(id)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  //  Handle Delete
+  const handleDelete = async id => {
+    console.log(id)
+    try {
+      await category(id)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -303,17 +305,6 @@ const ManageCategory = () => {
                       </div>
                     </form>
                   </div>
-
-                  {/* modal close / submit btn */}
-                  {/* <div className="mt-4">
-                    <button
-                      type="button"
-                      className="bg-[#2fa325] hover:bg-green-300 hover:text-black text-white font-semibold  inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Submit
-                    </button>
-                  </div> */}
                 </DialogPanel>
               </TransitionChild>
             </div>
@@ -374,13 +365,12 @@ const ManageCategory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* <h1>{medicines?.length}</h1> */}
                   {/* medicines row data */}
                   {categories.map((category) => (
                     <CategoryDataRows
                       key={category._id}
                       category={category}
-                      // handleDelete={handleDelete}
+                      handleDelete={handleDelete}
                       refetch={refetch}                    />
                   ))}
                 </tbody>

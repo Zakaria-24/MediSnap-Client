@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types'
+import DeleteModal from '../../Modal/DeleteModal'
+import { useState } from 'react'
 // import { useState } from 'react'
 // import {
 //   Description,
@@ -9,14 +11,16 @@ import PropTypes from 'prop-types'
 // import DeleteModal from '../../Modal/DeleteModal'
 // import UpdateCategoryModal from '../../Modal/UpdateCategoryModal'
 // handleDelete,refetch
-const CategoryDataRows = ({ category }) => {
-    console.log(category)
-  // for delete modal
-//   const [isOpen, setIsOpen] = useState(false)
+const CategoryDataRows = ({ category, handleDelete }) => {
 //   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-//   const closeModal = () => {
-//     setIsOpen(false)
-//   }
+ // for delete modal
+ const [isOpen, setIsOpen] = useState(false)
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
 
   return (
@@ -51,7 +55,7 @@ const CategoryDataRows = ({ category }) => {
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
-        //   onClick={() => setIsOpen(true)}
+          onClick={openModal}
           className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
         >
           <span
@@ -61,12 +65,12 @@ const CategoryDataRows = ({ category }) => {
           <span className='relative'>Delete</span>
         </button>
         {/* Delete modal */}
-        {/* <DeleteModal
+        <DeleteModal
           isOpen={isOpen}
           closeModal={closeModal}
           handleDelete={handleDelete}
           id={category?._id}
-        /> */}
+        />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
