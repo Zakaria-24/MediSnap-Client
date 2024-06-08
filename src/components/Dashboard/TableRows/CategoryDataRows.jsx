@@ -1,18 +1,9 @@
 import PropTypes from 'prop-types'
 import DeleteModal from '../../Modal/DeleteModal'
 import { useState } from 'react'
-// import { useState } from 'react'
-// import {
-//   Description,
-//   Dialog,
-//   DialogPanel,
-//   DialogTitle,
-// } from '@headlessui/react'
-// import DeleteModal from '../../Modal/DeleteModal'
-// import UpdateCategoryModal from '../../Modal/UpdateCategoryModal'
-// handleDelete,refetch
-const CategoryDataRows = ({ category, handleDelete }) => {
-//   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+import UpdateCategoryModal from '../../Modal/UpdateCategoryModal'
+
+const CategoryDataRows = ({ category, handleDelete, refetch }) => {
  // for delete modal
  const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
@@ -20,6 +11,15 @@ const CategoryDataRows = ({ category, handleDelete }) => {
   };
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+//   for update modal
+const [isUpdateOpen, setIsUpdateOpen] = useState(false)
+  const openUpdateModal = () => {
+    setIsUpdateOpen(true);
+  };
+  const closeUpdateModal = () => {
+    setIsUpdateOpen(false);
   };
 
 
@@ -36,16 +36,13 @@ const CategoryDataRows = ({ category, handleDelete }) => {
               />
             </div>
           </div>
-          {/* <div className='ml-3'>
-            <p className='text-gray-900 whitespace-no-wrap'>{category?.itemName}</p>
-          </div> */}
         </div>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-      <p className='text-gray-900 whitespace-no-wrap'>{category?.category}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{category?.medicineName}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{category?.medicineName}</p>
+      <p className='text-gray-900 whitespace-no-wrap'>{category?.categoryName}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>{category?.description}</p>
@@ -74,7 +71,7 @@ const CategoryDataRows = ({ category, handleDelete }) => {
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
-        //   onClick={() => setIsEditModalOpen(true)}
+          onClick={openUpdateModal}
           className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
         >
           <span
@@ -84,12 +81,13 @@ const CategoryDataRows = ({ category, handleDelete }) => {
           <span className='relative'>Update</span>
         </button>
         {/* Update Modal */}
-        {/* <UpdatecategoryModal
-          isOpen={isEditModalOpen}
-          setIsEditModalOpen={setIsEditModalOpen}
+        <UpdateCategoryModal
+          isOpen={isUpdateOpen}
+        //   setIsUpdateOpen={setIsUpdateOpen}
           category={category}
           refetch={refetch}
-        /> */}
+          closeUpdateModal={closeUpdateModal}
+        />
       </td>
     </tr>
   )

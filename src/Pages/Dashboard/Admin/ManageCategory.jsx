@@ -1,13 +1,3 @@
-// import { useState } from "react";
-// import {
-//   Dialog,
-//   Transition,
-//   TransitionChild,
-//   DialogPanel,
-//   DialogTitle,
-// } from "@headlessui/react";
-// import { Fragment } from "react";
-
 import { Fragment, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -15,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utils";
-// import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import {
   Dialog,
   DialogPanel,
@@ -25,17 +14,6 @@ import {
 } from "@headlessui/react";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import CategoryDataRows from "../../../components/Dashboard/TableRows/CategoryDataRows";
-// import CategoryDataRows from "../../../components/Dashboard/TableRows/CategoryDataRows";
-
-// import toast from "react-hot-toast";
-// import { imageUpload } from "../../../api/utils";
-
-// import { useForm } from "react-hook-form";
-// import { useMutation, useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-// import LoadingSpinner from "../../../components/shared/LoadingSpinner";
-// import useAuth from "../../../hooks/useAuth";
-// import MedicinesDataRows from "../../../components/Dashboard/TableRows/MedicinesDataRows";
 
 const ManageCategory = () => {
   const axiosSecure = useAxiosSecure();
@@ -51,13 +29,6 @@ const ManageCategory = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  // Hook Form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   // Post Request for medicine
   const { mutateAsync } = useMutation({
@@ -75,8 +46,15 @@ const ManageCategory = () => {
     },
   });
 
+    // Hook Form
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm();
+
   const onSubmit = async (data) => {
-    const { category, medicineName, description, price, photoURL } = data;
+    const { categoryName, medicineName, description, price, photoURL } = data;
     // console.log(data);
     // 1. Upload image and get image url
     const image_url = await imageUpload(photoURL[0]);
@@ -85,7 +63,7 @@ const ManageCategory = () => {
     const categorydata = {
       adminEmail: email,
       adminName: displayName,
-      category,
+      categoryName,
       medicineName,
       description,
       price,
@@ -130,7 +108,7 @@ const ManageCategory = () => {
       console.log(data)
       refetch()
       toast.success('Successfully deleted.')
-      console.log("delete")
+      // console.log("delete")
     },
   })
 
@@ -143,6 +121,7 @@ const ManageCategory = () => {
       console.log(err)
     }
   }
+  
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -203,7 +182,7 @@ const ManageCategory = () => {
                   </DialogTitle>
                   {/* form body */}
                   <div className="mt-2">
-                    {/* <MedicineAddModalForm /> */}
+                    {/* <CategoryAddModalForm /> */}
                     <form
                       onSubmit={handleSubmit(onSubmit)}
                       noValidate=""
@@ -213,8 +192,8 @@ const ManageCategory = () => {
                       <div className="space-y-4">
                         <div>
                           <select
-                            name="category"
-                            {...register("category", { required: true })}
+                            name="categoryName"
+                            {...register("categoryName", { required: true })}
                             className="select select-success w-full"
                           >
                             <option disabled selected>
