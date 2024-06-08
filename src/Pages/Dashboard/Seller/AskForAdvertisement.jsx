@@ -3,15 +3,23 @@ import { imageUpload } from "../../../api/utils";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
-import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from "../../../components/shared/LoadingSpinner";
+import AdvertisementDataRows from "../../../components/Dashboard/TableRows/AdvertisementDataRows";
 
 const AskForAdvertisement = () => {
-    const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
-    const { email, displayName } = user;
-     // For Modal
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { email, displayName } = user;
+  // For Modal
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -20,20 +28,23 @@ const AskForAdvertisement = () => {
     setIsOpen(false);
   };
 
-      // Post Request for medicine
-      const { mutateAsync } = useMutation({
-        mutationFn: async (advertisementData) => {
-          const { data } = await axiosSecure.post(`/advertisement`, advertisementData);
-          return data;
-        },
-        onSuccess: () => {
-          toast.success("Medicine Added Successfully!");
-        },
-        onError: (err) => {
-          console.log(err);
-          toast.error("Something went wrong!");
-        },
-      });
+  // Post Request for medicine
+  const { mutateAsync } = useMutation({
+    mutationFn: async (advertisementData) => {
+      const { data } = await axiosSecure.post(
+        `/advertisement`,
+        advertisementData
+      );
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Medicine Added Successfully!");
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error("Something went wrong!");
+    },
+  });
 
   // Hook Form
   const {
@@ -43,11 +54,7 @@ const AskForAdvertisement = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const {
-        medicineName ,
-        description,
-      photoURL,
-    } = data;
+    const { medicineName, description, photoURL } = data;
     console.log(data);
 
     // 1. Upload image and get image url
@@ -57,7 +64,7 @@ const AskForAdvertisement = () => {
     const advertisementData = {
       sellerEmail: email,
       sellerName: displayName,
-      medicineName ,
+      medicineName,
       description,
       photoURL: image_url,
     };
@@ -71,27 +78,67 @@ const AskForAdvertisement = () => {
       toast.error(err.message);
     }
   };
+
+  //   get All advertisement data
+  //   Fetch Advertise Data
+  const { data: advertisements = [], isLoading,refetch } = useQuery({
+    queryKey: ["advertisements", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/advertisements/${user?.email}`);
+      // console.log(data);
+
+      return data;
+    },
+  });
+
+  //   delete
+  // const { mutateAsync: medicines } = useMutation({
+  //   mutationFn: async id => {
+  //     const { data } = await axiosSecure.delete(`/room/${id}`)
+  //     return data
+  //   },
+  //   onSuccess: data => {
+  //     console.log(data)
+  //     refetch()
+  //     toast.success('Successfully deleted.')
+  //   },
+  // })
+
+  // //  Handle Delete
+  // const handleDelete = async id => {
+  //   console.log(id)
+  //   try {
+  //     await medicines(id)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <>
-      <div className="hero min-h-1.5" style={{backgroundImage: 'url(https://i.ibb.co/PGgjyV5/medi.jpg)'}}>
-  <div className="hero-overlay bg-opacity-60"></div>
-  <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold">NEW ONE</h1>
-      <p className="mb-5">You can advertise it!</p>
-      <button
-                type="button"
-                onClick={openModal}
-                className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-[#2fa325] hover:bg-green-300 hover:text-black text-white font-semibold"
-              >
-                Add Advertise
-              </button>
-    </div>
-  </div>
-</div>
+      <div
+        className="hero min-h-1.5"
+        style={{ backgroundImage: "url(https://i.ibb.co/PGgjyV5/medi.jpg)" }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">NEW ONE</h1>
+            <p className="mb-5">You can advertise it!</p>
+            <button
+              type="button"
+              onClick={openModal}
+              className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-[#2fa325] hover:bg-green-300 hover:text-black text-white font-semibold"
+            >
+              Add Advertise
+            </button>
+          </div>
+        </div>
+      </div>
 
-  {/* modal body */}
-  <Transition appear show={isOpen} as={Fragment}>
+      {/* modal body */}
+      <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <TransitionChild
             as={Fragment}
@@ -201,6 +248,57 @@ const AskForAdvertisement = () => {
           </div>
         </Dialog>
       </Transition>
+
+       {/* show medicines info  */}
+       <div className="container mx-auto px-4 sm:px-8">
+        <div className="py-8">
+          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+              <table className="min-w-full leading-normal">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
+                      Image
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
+                      Medicine Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
+                      Description
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* advertisement row data */}
+                  {advertisements.map((addvertise) => (
+                    <AdvertisementDataRows
+                      key={addvertise._id}
+                      addvertise={addvertise}
+                      // handleDelete={handleDelete}
+                      refetch={refetch}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

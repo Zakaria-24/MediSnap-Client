@@ -44,13 +44,13 @@ const MedicinesDataRows = ({ medicine }) => {
         <p className='text-gray-900 whitespace-no-wrap'>{medicine?.category}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>${medicine?.shortDescription}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{medicine?.shortDescription}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>${medicine?.perUnitPrice}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>${medicine?.discountPercentage}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{medicine?.discountPercentage}%</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
