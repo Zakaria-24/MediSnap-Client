@@ -38,19 +38,16 @@ const CategoryDataRows = ({ category }) => {
         </div>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-      <p className='text-gray-900 whitespace-no-wrap'>{category?.itemName}</p>
+      <p className='text-gray-900 whitespace-no-wrap'>{category?.category}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{category?.category}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{category?.medicineName}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{category?.shortDescription}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{category?.description}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>${category?.perUnitPrice}</p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{category?.discountPercentage}%</p>
+        <p className='text-gray-900 whitespace-no-wrap'>${category?.price}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button

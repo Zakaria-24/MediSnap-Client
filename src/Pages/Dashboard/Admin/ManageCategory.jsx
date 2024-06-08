@@ -12,11 +12,19 @@ import { Fragment, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utils";
 // import LoadingSpinner from "../../../components/shared/LoadingSpinner";
-import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
+import LoadingSpinner from "../../../components/shared/LoadingSpinner";
+import CategoryDataRows from "../../../components/Dashboard/TableRows/CategoryDataRows";
 // import CategoryDataRows from "../../../components/Dashboard/TableRows/CategoryDataRows";
 
 // import toast from "react-hot-toast";
@@ -44,7 +52,6 @@ const ManageCategory = () => {
     setIsOpen(false);
   };
 
-  
   // Hook Form
   const {
     register,
@@ -68,28 +75,22 @@ const ManageCategory = () => {
   });
 
   const onSubmit = async (data) => {
-    const {
-      medicineName,
-      description,
-      category,
-      price,
-      photoURL,
-    } = data;
+    const { category, medicineName, description, price, photoURL } = data;
     // console.log(data);
-      // 1. Upload image and get image url
-      const image_url = await imageUpload(photoURL[0]);
-      // console.log(image_url);
+    // 1. Upload image and get image url
+    const image_url = await imageUpload(photoURL[0]);
+    // console.log(image_url);
 
     const categorydata = {
-      addederEmail: email,
-      addederName: displayName,
+      adminEmail: email,
+      adminName: displayName,
+      category,
       medicineName,
       description,
-      category,
-     price,
+      price,
       photoURL: image_url,
     };
-    // console.log(categorydata);
+    console.log(categorydata);
 
     try {
       // Post request to server
@@ -100,21 +101,23 @@ const ManageCategory = () => {
     }
   };
 
-  // // Get request in Medicines
-  // //   Fetch Medicines Data
-  // const {
-  //   data: cetegories = [],
-  //   isLoading,
-  //   refetch,
-  // } = useQuery({
-  //   queryKey: ["cetegories", user?.email],
-  //   queryFn: async () => {
-  //     const { data } = await axiosSecure(`/cetegories/${user?.email}`);
-  //     // console.log(data);
+  // Get request in Medicines
+  //   Fetch Medicines Data
+  const {
+    data: categories = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["categories", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/categories/${user?.email}`);
+      // console.log(data);
 
-  //     return data;
-  //   },
-  // });
+      return data;
+      
+    },
+
+  });
 
   //   delete
   // const { mutateAsync: medicines } = useMutation({
@@ -138,7 +141,7 @@ const ManageCategory = () => {
   //     console.log(err)
   //   }
   // }
-  // if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -206,13 +209,15 @@ const ManageCategory = () => {
                       className="space-y-8"
                     >
                       <div className="space-y-4">
-                      <div>
+                        <div>
                           <select
                             name="category"
                             {...register("category", { required: true })}
                             className="select select-success w-full"
                           >
-                            <option disabled selected>Select Category</option>
+                            <option disabled selected>
+                              Select Category
+                            </option>
                             <option value="Tablet">Tablet</option>
                             <option value="Syrup">Syrup</option>
                             <option value="Capsule">Capsule</option>
@@ -239,14 +244,14 @@ const ManageCategory = () => {
                           {/* <label className="block text-sm">Short Description</label> */}
                           <input
                             type="text"
-                            name="Description"
+                            name="description"
                             placeholder="Description"
                             className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-                            {...register("Description", {
+                            {...register("description", {
                               required: true,
                             })}
                           />
-                          {errors.Description && (
+                          {errors.description && (
                             <span className="text-red-400">
                               This field is required
                             </span>
@@ -269,8 +274,7 @@ const ManageCategory = () => {
                             </span>
                           )}
                         </div>
-                        
-                       
+
                         <div className="space-y-2">
                           <label className="block text-sm">Image</label>
                           <input
@@ -372,14 +376,13 @@ const ManageCategory = () => {
                 <tbody>
                   {/* <h1>{medicines?.length}</h1> */}
                   {/* medicines row data */}
-                  {/* {cetegories.map((category) => (
+                  {categories.map((category) => (
                     <CategoryDataRows
                       key={category._id}
                       category={category}
-                      handleDelete={handleDelete}
-                      refetch={refetch}
-                    />
-                  ))} */}
+                      // handleDelete={handleDelete}
+                      refetch={refetch}                    />
+                  ))}
                 </tbody>
               </table>
             </div>
