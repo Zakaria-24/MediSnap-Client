@@ -98,7 +98,7 @@ const ManageCategory = () => {
 
   });
 
-  //   delete
+  //   delete category
   const { mutateAsync: category } = useMutation({
     mutationFn: async id => {
       const { data } = await axiosSecure.delete(`/category/${id}`)
