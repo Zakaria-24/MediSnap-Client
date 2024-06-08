@@ -12,10 +12,19 @@ import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utils";
 
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../components/shared/LoadingSpinner";
+import useAuth from "../../../hooks/useAuth";
+import MedicinesDataRows from "../../../components/Dashboard/TableRows/MedicinesDataRows";
 
 const ManageMedicines = () => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { email, displayName } = user;
+  // console.log(email, displayName)
+
+  // For Modal
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -24,27 +33,28 @@ const ManageMedicines = () => {
     setIsOpen(false);
   };
 
-  const axiosSecure = useAxiosSecure()
-
-  const { mutateAsync } = useMutation({
-    mutationFn: async medicineData => {
-      const { data } = await axiosSecure.post(`/medicine`, medicineData, )
-      return data
-    },
-    onSuccess: () => {
-      toast.success('Medicine Added Successfully!')
-    },
-    onError: (err) => {
-      console.log(err)
-      toast.error('Something went wrong!')
-    }
-  })
-
+  
+  // Hook Form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  // Post Request for medicine
+  const { mutateAsync } = useMutation({
+    mutationFn: async (medicineData) => {
+      const { data } = await axiosSecure.post(`/medicine`, medicineData);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Medicine Added Successfully!");
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error("Something went wrong!");
+    },
+  });
 
   const onSubmit = async (data) => {
     const {
@@ -59,8 +69,13 @@ const ManageMedicines = () => {
       photoURL,
     } = data;
     // console.log(data);
+      // 1. Upload image and get image url
+      const image_url = await imageUpload(photoURL[0]);
+      // console.log(image_url);
 
     const medicineData = {
+      addederEmail: email,
+      addederName: displayName,
       itemName,
       genericName,
       shortDescription,
@@ -69,25 +84,62 @@ const ManageMedicines = () => {
       itemMassUnit,
       perUnitPrice,
       discountPercentage,
-      photoURL,
+      photoURL: image_url,
     };
-    console.log(medicineData);
+    // console.log(medicineData);
 
     try {
-      // 1. Upload image and get image url
-      const image_url = await imageUpload(photoURL[0]);
-      console.log(image_url);
-
-        // Post request to server
-        await mutateAsync(medicineData)
+      // Post request to server
+      await mutateAsync(medicineData);
     } catch (err) {
       console.log(err);
       toast.error(err.message);
     }
   };
 
+  // Get request in Medicines
+  //   Fetch Medicines Data
+  const {
+    data: medicines = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["medicines", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/medicines/${user?.email}`);
+      // console.log(data);
+
+      return data;
+    },
+  });
+
+  //   delete
+  // const { mutateAsync: medicines } = useMutation({
+  //   mutationFn: async id => {
+  //     const { data } = await axiosSecure.delete(`/room/${id}`)
+  //     return data
+  //   },
+  //   onSuccess: data => {
+  //     console.log(data)
+  //     refetch()
+  //     toast.success('Successfully deleted.')
+  //   },
+  // })
+
+  // //  Handle Delete
+  // const handleDelete = async id => {
+  //   console.log(id)
+  //   try {
+  //     await medicines(id)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <>
+      {/* Add medicine btn */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="p-6 py-12 bg-green-100">
           <div className="container mx-auto">
@@ -322,6 +374,82 @@ const ManageMedicines = () => {
           </div>
         </Dialog>
       </Transition>
+
+      {/* show medicines info  */}
+      <div className="container mx-auto px-4 sm:px-8">
+        <div className="py-8">
+          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+              <table className="min-w-full leading-normal">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Image
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Medicine Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Description
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Discount
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Delete
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
+                      Update
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* <h1>{medicines?.length}</h1> */}
+                  {/* Room row data */}
+                  {medicines.map((medicine) => (
+                    <MedicinesDataRows
+                      key={medicine._id}
+                      medicine={medicine}
+                      // handleDelete={handleDelete}
+                      refetch={refetch}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

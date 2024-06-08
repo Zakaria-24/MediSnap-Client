@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import LoadingSpinner from '../components/shared/LoadingSpinner'
 import useRole from '../hooks/useRole'
-import PropTypes from 'prop-types'
+// eslint-disable-next-line react/prop-types
 const SellerRoute = ({ children }) => {
   const [role, isLoading] = useRole()
 
@@ -11,7 +11,3 @@ const SellerRoute = ({ children }) => {
 }
 
 export default SellerRoute
-
-SellerRoute.propTypes = {
-  children: PropTypes.element,
-}

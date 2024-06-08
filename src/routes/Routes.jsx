@@ -126,6 +126,7 @@ const router = createBrowserRouter([
       // sales routes
       {
         index: true,
+        path: "sellerHome",
         element: (
           <PrivateRoute>
             <SellerRoute>

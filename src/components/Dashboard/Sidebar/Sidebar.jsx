@@ -233,7 +233,6 @@ import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
-// import ToggleBtn from '../../shared/Button/ToggleBtn'
 import useRole from "../../../hooks/useRole";
 import MenuItem from "./Menu/MenuItem";
 import AdminMenu from "./Menu/AdminMenu";
@@ -244,16 +243,12 @@ const Sidebar = () => {
   const { logOut } = useAuth();
   const [role, isLoading] = useRole();
   const [isActive, setActive] = useState(false);
-  // const [toggle, setToggle] = useState(true)
   console.log(role, isLoading);
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
 
-  // const toggleHandler = event => {
-  //   setToggle(event.target.checked)
-  // }
 
   if(isLoading) return <h1>loading</h1>
   return (
