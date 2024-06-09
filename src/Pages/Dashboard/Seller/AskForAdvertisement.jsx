@@ -39,6 +39,7 @@ const AskForAdvertisement = () => {
     },
     onSuccess: () => {
       toast.success("Medicine Added Successfully!");
+      refetch()
     },
     onError: (err) => {
       console.log(err);
@@ -61,12 +62,14 @@ const AskForAdvertisement = () => {
     const image_url = await imageUpload(photoURL[0]);
     console.log(image_url);
 
+
     const advertisementData = {
       sellerEmail: email,
       sellerName: displayName,
       medicineName,
       description,
       photoURL: image_url,
+      currentStatus: "requested"
     };
     console.log(advertisementData);
 
@@ -201,7 +204,7 @@ const AskForAdvertisement = () => {
                           <input
                             type="text"
                             name="description"
-                            placeholder="Description"
+                            placeholder="Short Description"
                             className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
                             {...register("description", {
                               required: true,
@@ -249,35 +252,35 @@ const AskForAdvertisement = () => {
         </Dialog>
       </Transition>
 
-       {/* show medicines info  */}
+       {/* show advertisement info  */}
        <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>
-                  <tr>
+                  <tr className="bg-green-100">
                     <th
                       scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Image
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Medicine Name
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Description
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Status
                     </th>
@@ -285,10 +288,10 @@ const AskForAdvertisement = () => {
                 </thead>
                 <tbody>
                   {/* advertisement row data */}
-                  {advertisements.map((addvertise) => (
+                  {advertisements.map((advertise) => (
                     <AdvertisementDataRows
-                      key={addvertise._id}
-                      addvertise={addvertise}
+                      key={advertise._id}
+                      advertise={advertise}
                       // handleDelete={handleDelete}
                       refetch={refetch}
                     />

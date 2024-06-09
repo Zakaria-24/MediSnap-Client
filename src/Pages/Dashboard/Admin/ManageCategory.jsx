@@ -203,6 +203,11 @@ const ManageCategory = () => {
                             <option value="Syrup">Syrup</option>
                             <option value="Capsule">Capsule</option>
                             <option value="Injection">Injection</option>
+                            <option value="Syrup">Inhaler</option>
+                            <option value="Capsule">Cream</option>
+                            <option value="Injection">Drops</option>
+                            <option value="Capsule">Powder</option>
+                            <option value="Injection">Gel</option>
                             <option value="Others">Others</option>
                           </select>
                         </div>
