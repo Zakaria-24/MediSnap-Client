@@ -1,25 +1,35 @@
 import PropTypes from "prop-types";
 import { FaEye } from "react-icons/fa";
 import { GrSelect } from "react-icons/gr";
-// import { useState } from 'react'
-// import {
-//   Description,
-//   Dialog,
-//   DialogPanel,
-//   DialogTitle,
-// } from '@headlessui/react'
-// import DeleteModal from '../../Modal/DeleteModal'
-// import UpdateMedicineModal from '../../Modal/UpdateMedicineModal'
-// handleDelete,refetch
-const ShopMedicinesDataRows = ({ medicine }) => {
-  console.log(medicine);
-  // for delete modal
-  //   const [isOpen, setIsOpen] = useState(false)
-  //   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  //   const closeModal = () => {
-  //     setIsOpen(false)
-  //   }
+import ShopMedicineDetailsModal from "../../Modal/ShopMedicineDetailsModal";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../shared/LoadingSpinner";
 
+// eslint-disable-next-line react/prop-types
+const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
+    // console.log(medicine);
+  // for delete modal
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  //   get medicine data by specific id
+  const { data: medicineDetails = {}, isLoading } = useQuery({
+    queryKey: ["mediDetails", medicine?._id],
+    queryFn: async () => {
+      const { data } = await axiosCommon(`/mediDetails/${medicine?._id}`);
+      return data;
+    },
+  });
+    // console.log(medicineDetails);
+
+
+    if(isLoading) return <LoadingSpinner/>
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -85,6 +95,7 @@ const ShopMedicinesDataRows = ({ medicine }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-300 bg-white text-sm">
         <button
+          onClick={openModal}
           //   onClick={() => setIsEditModalOpen(true)}
           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
         >
@@ -93,16 +104,16 @@ const ShopMedicinesDataRows = ({ medicine }) => {
             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
           ></span>
           <span className="relative">
-            <FaEye/>
+            <FaEye />
           </span>
         </button>
-        {/* Update Modal */}
-        {/* <UpdateMedicineModal
-          isOpen={isEditModalOpen}
-          setIsEditModalOpen={setIsEditModalOpen}
+        {/* Shop Medicine Details Modal */}
+        <ShopMedicineDetailsModal
+          isOpen={isOpen}
+          closeModal={closeModal}
           medicine={medicine}
-          refetch={refetch}
-        /> */}
+          medicineDetails={medicineDetails}
+        />
       </td>
     </tr>
   );

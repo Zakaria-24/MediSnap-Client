@@ -98,6 +98,7 @@ const Shop = () => {
                       medicine={medicine}
                       // handleDelete={handleDelete}
                       refetch={refetch}
+                      axiosCommon={axiosCommon}
                     />
                   ))}
                 </tbody>

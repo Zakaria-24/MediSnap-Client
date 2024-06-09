@@ -1,28 +1,37 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
-import { Fragment } from 'react';
-import { imageUpload } from '../../api/utils';
-import { useForm } from 'react-hook-form';
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
+import { Fragment } from "react";
+import { imageUpload } from "../../api/utils";
+import { useForm } from "react-hook-form";
 
-
-const UpdateCategoryModal = ({ closeUpdateModal, refetch, isOpen, category}) => {
-    const { 
-        categoryName,
-        medicineName,
-        description,
-        price } = category;
-    const axiosSecure = useAxiosSecure();
-     //   Update
+const UpdateCategoryModal = ({
+  closeUpdateModal,
+  refetch,
+  isOpen,
+  category,
+}) => {
+  const { categoryName, medicineName, description, price } = category;
+  const axiosSecure = useAxiosSecure();
+  //   Update
   const { mutateAsync } = useMutation({
     mutationFn: async (updatCategoryData) => {
-      const { data } = await axiosSecure.put(`category/${category?._id}`, updatCategoryData);
+      const { data } = await axiosSecure.put(
+        `category/${category?._id}`,
+        updatCategoryData
+      );
       return data;
     },
     onSuccess: () => {
-      refetch()
+      refetch();
       toast.success("Medicine Category Updated Successfully!");
     },
     onError: (err) => {
@@ -31,12 +40,12 @@ const UpdateCategoryModal = ({ closeUpdateModal, refetch, isOpen, category}) => 
     },
   });
 
-    // Hook Form
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
+  // Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
     const { categoryName, medicineName, description, price, photoURL } = data;
@@ -63,48 +72,44 @@ const UpdateCategoryModal = ({ closeUpdateModal, refetch, isOpen, category}) => 
     }
   };
 
-    return (
-        <>
-         <Transition appear show={isOpen} as={Fragment}>
-      <Dialog
-        as='div'
-        className='relative z-10'
-        onClose={closeUpdateModal}
-      >
-        <TransitionChild
-          as={Fragment}
-          enter='ease-out duration-300'
-          enterFrom='opacity-0'
-          enterTo='opacity-100'
-          leave='ease-in duration-200'
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'
-        >
-          <div className='fixed inset-0 bg-black bg-opacity-25' />
-        </TransitionChild>
+  return (
+    <>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeUpdateModal}>
+          <TransitionChild
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </TransitionChild>
 
-        <div className='fixed inset-0 overflow-y-auto'>
-          <div className='flex min-h-full items-center justify-center p-4 text-center'>
-            <TransitionChild
-              as={Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0 scale-95'
-              enterTo='opacity-100 scale-100'
-              leave='ease-in duration-200'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-95'
-            >
-                 {/* modal content */}
-              <DialogPanel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-green-100 p-6 text-left align-middle shadow-xl transition-all'>
-                <DialogTitle
-                  as='h3'
-                  className='text-lg font-medium text-center leading-6 text-gray-900'
-                >
-                  Update Room Info
-                </DialogTitle>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <TransitionChild
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                {/* modal content */}
+                <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-green-100 p-6 text-left align-middle shadow-xl transition-all">
+                  <DialogTitle
+                    as="h3"
+                    className="text-lg font-medium text-center leading-6 text-gray-900"
+                  >
+                    Update Room Info
+                  </DialogTitle>
 
-                    {/* <UpdateCategoryModalForm /> */}
-                <div className="mt-2">
+                  {/* <Update Category Modal Form /> */}
+                  <div className="mt-2">
                     <form
                       onSubmit={handleSubmit(onSubmit)}
                       noValidate=""
@@ -211,32 +216,32 @@ const UpdateCategoryModal = ({ closeUpdateModal, refetch, isOpen, category}) => 
                     </form>
                   </div>
 
-                <hr className='mt-8 ' />
-                <div className='mt-2 '>
-                  <button
-                    type='button'
-                    className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                    onClick={closeUpdateModal}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </DialogPanel>
-            </TransitionChild>
+                  <hr className="mt-8 " />
+                  <div className="mt-2 ">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      onClick={closeUpdateModal}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
           </div>
-        </div>
-      </Dialog>
-    </Transition>   
-        </>
-    );
+        </Dialog>
+      </Transition>
+    </>
+  );
 };
 
 UpdateCategoryModal.propTypes = {
-    category: PropTypes.object,
-    refetch: PropTypes.func,
-    handleDelete: PropTypes.func,
-    isOpen: PropTypes.bool,
-    closeUpdateModal: PropTypes.func,
-  }
+  category: PropTypes.object,
+  refetch: PropTypes.func,
+  handleDelete: PropTypes.func,
+  isOpen: PropTypes.bool,
+  closeUpdateModal: PropTypes.func,
+};
 
 export default UpdateCategoryModal;

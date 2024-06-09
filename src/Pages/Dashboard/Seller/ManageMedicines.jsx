@@ -91,6 +91,7 @@ const ManageMedicines = () => {
     try {
       // Post request to server
       await mutateAsync(medicineData);
+      refetch()
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -446,8 +447,6 @@ const ManageMedicines = () => {
                     <MedicinesDataRows
                       key={medicine._id}
                       medicine={medicine}
-                      // handleDelete={handleDelete}
-                      refetch={refetch}
                     />
                   ))}
                 </tbody>
