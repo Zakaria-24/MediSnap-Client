@@ -15,7 +15,7 @@ const Carousel = () => {
   const bgimg2 = "https://i.ibb.co/j50wG4P/2.jpg";
   const bgimg3 = "https://i.ibb.co/bvPb5Zd/pexels-marcelochagas-2183773.jpg";
   return (
-    <div className="container px-6 mt-0 border-red-400 border-2 mx-auto">
+    <div className="container px-6 mt-0 mx-auto">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

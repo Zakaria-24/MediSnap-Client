@@ -375,7 +375,7 @@ const ManageMedicines = () => {
         </Dialog>
       </Transition>
 
-      {/* show medicines info  */}
+      {/* show specific seller medicines info  */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -406,6 +406,12 @@ const ManageMedicines = () => {
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Description
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
+                      Company
                     </th>
                     <th
                       scope="col"

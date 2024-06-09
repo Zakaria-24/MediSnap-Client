@@ -259,8 +259,8 @@ const Sidebar = () => {
           <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
             <h1 className="text-3xl">
-                  <span className="md:text-6xl text-green-700">M</span>edi
-                  <span className="md:text-5xl text-green-600">Snap</span>
+                  <span className="text-4xl text-green-700">M</span>edi
+                  <span className=" text-green-600">Snap</span>
                 </h1>
             </Link>
           </div>
@@ -284,9 +284,9 @@ const Sidebar = () => {
           <div>
             <div className="w-full hidden md:flex px-6 py-2 shadow-lg rounded-lg justify-center items-center bg-green-100 mx-auto">
               <Link to="/">
-                <h1 className="text-3xl">
-                  <span className="md:text-6xl text-green-700">M</span>edi
-                  <span className="md:text-5xl text-green-600">Snap</span>
+                <h1 className="text-3xl font-extrabold">
+                  <span className="text-4xl text-green-700">M</span>edi
+                  <span className=" text-green-600">Snap</span>
                 </h1>
               </Link>
             </div>
