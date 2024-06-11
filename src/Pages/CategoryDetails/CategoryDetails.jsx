@@ -1,40 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-
+import CategoryDetailsDataRow from "../../components/Dashboard/TableRows/CategoryDetailsDataRow";
+// import CategoryRelatedCart from "./CategoryRelatedCart";
+import CategoryCart from "../../components/CategoryCart/CategoryCart";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
 
 const CategoryDetails = () => {
-  const axiosCommon = useAxiosCommon()
+  const axiosCommon = useAxiosCommon();
 
-const {id} = useParams()
-console.log(id)
-const { data: categoryDetails = {} } = useQuery({
-  queryKey: ['ctgDetails'],
-  queryFn: async () => {
-    const {data} = await axiosCommon(`/ctgDetails/${id}`)
-    return data
-  }
-})
+      // get categorydata for categoryDetails page
+  const { id } = useParams();
+  // console.log(id);
+  const { data: categoryDetails = {} } = useQuery({
+    queryKey: ["ctgDetails"],
+    queryFn: async () => {
+      const { data } = await axiosCommon(`/ctgDetails/${id}`);
+      return data;
+    },
+  });
 
-
-
-console.log(categoryDetails?.categoryName)
-
-console.log(id)
-const { data: categoryName = [] } = useQuery({
-  queryKey: ['categoryDetails', categoryDetails?.categoryName],
-  queryFn: async () => {
-    const {data} = await axiosCommon(`/categoryDetails/${categoryDetails?.categoryName}`)
-    return data
-  }
-})
-
-console.log(categoryName)
+  // console.log(categoryDetails?.categoryName);
+  // console.log(id);
 
 
-    return (
-        <div>
-             {/* show category info  */}
+  // get selected Related deta for categoryDetails page
+  
+  const { data: categoryName = [], isLoading  } = useQuery({
+    queryKey: ["categoryDetails", categoryDetails?.categoryName],
+    queryFn: async () => {
+      const { data } = await axiosCommon(
+        `/categoryDetails/${categoryDetails?.categoryName}`
+      );
+      return data;
+    },
+  });
+
+  // console.log(categoryName);
+
+  if (isLoading) return <LoadingSpinner />;
+
+  return (
+    <>
+      {/* show category info  */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -87,18 +95,33 @@ console.log(categoryName)
                   </tr>
                 </thead>
                 <tbody>
-
-
-                  {/* medicines row data */}
-                 
+                  {/* category Details data row data */}
+                  <CategoryDetailsDataRow 
+                  categoryDetails={categoryDetails} 
+                  />
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* related data card */}
+        <h1 className=" text-3xl font-bold flex justify-center">
+          See Related All Data{" "}
+        </h1>
+        {/* {categoryName.map((category) => {
+          return <CategoryCart key={category._id} category={category} />;
+        })} */}
+        {/* <CategoryReelatedCart /> */}
+
+        <div className="container mx-auto pt-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {categoryName.map((category) => (
+            <CategoryCart key={category._id} category={category} />
+          ))}
         </div>
-    );
+      </div>
+    </>
+  );
 };
 
 export default CategoryDetails;
