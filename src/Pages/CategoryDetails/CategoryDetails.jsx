@@ -1,33 +1,42 @@
-import CartDataRows from "../../components/Dashboard/TableRows/CartDataRows";
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../hooks/useAxiosSecure'
-import useAuth from './../../hooks/useAuth';
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 
-const Cart = () => {
-  const {user} = useAuth()
-  const axiosSecure = useAxiosSecure()
+const CategoryDetails = () => {
+  const axiosCommon = useAxiosCommon()
 
-const {data: cartData = [] , refetch } = useQuery({
-  queryKey: ['CartData'],
+const {id} = useParams()
+console.log(id)
+const { data: categoryDetails = {} } = useQuery({
+  queryKey: ['ctgDetails'],
   queryFn: async () => {
-const {data} = await axiosSecure(`/selectedCarts/${user?.email}`);
-return data;
-
-    // const response = await fetch('http://localhost:8000/api/v1/medicines/cart');
-    // const data = await response.json();
-    // return data.data;
-  },
+    const {data} = await axiosCommon(`/ctgDetails/${id}`)
+    return data
+  }
 })
-console.log(cartData)
+
+
+
+console.log(categoryDetails?.categoryName)
+
+console.log(id)
+const { data: categoryName = [] } = useQuery({
+  queryKey: ['categoryDetails', categoryDetails?.categoryName],
+  queryFn: async () => {
+    const {data} = await axiosCommon(`/categoryDetails/${categoryDetails?.categoryName}`)
+    return data
+  }
+})
+
+console.log(categoryName)
+
 
     return (
-        <>
-        <h1></h1>
-            {/* show specific seller medicines info  */}
+        <div>
+             {/* show category info  */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
-        <h1 className='flex justify-center text-2xl font-bold underline'>YOUR SELECTED MEDICINES INFO.{" "}<span className="bg-green-600 px-2 py-1 rounded-xl text-white"><h1>{cartData?.length}</h1></span></h1>
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
@@ -49,7 +58,7 @@ console.log(cartData)
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Category
+                      Category Name
                     </th>
                     <th
                       scope="col"
@@ -61,48 +70,35 @@ console.log(cartData)
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Company
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
-                    >
                       Price
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Discount
+                      Select
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                      className="px-5 py-3  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Mass Unit
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
-                    >
-                      Delete
+                      View
                     </th>
                   </tr>
                 </thead>
                 <tbody>
+
+
                   {/* medicines row data */}
-                  
-                  {cartData.map((cart) => (
-                    <CartDataRows key={cart._id} cart={cart} refetch={refetch} />
-                  ))}
+                 
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-        </>
+        </div>
     );
 };
 
-export default Cart;
+export default CategoryDetails;

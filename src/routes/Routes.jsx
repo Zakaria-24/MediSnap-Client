@@ -21,6 +21,9 @@ import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 import AdminRoute from "./AdminRoute";
 import ManageCategory from "../Pages/Dashboard/Admin/ManageCategory";
+import Checkout from "../Pages/Checkout/Checkout";
+import Invoice from "../Pages/Invoice/Invoice";
+import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +40,30 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
+        path: "/categoryDetails/:id",
+        element: (<PrivateRoute>
+          <CategoryDetails />
+        </PrivateRoute>),
+        // loader: ({ params }) =>
+        //   fetch(
+        //     `${import.meta.env.VITE_API_URL}/categories/${params.categoryName}`
+        //   ),
+      },
+      {
         path: "/shopCard",
         element: (
           <PrivateRoute>
             <Cart />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/invoice",
+        element: <Invoice />,
       },
     ],
   },

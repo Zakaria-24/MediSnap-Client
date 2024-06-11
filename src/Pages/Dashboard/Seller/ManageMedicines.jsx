@@ -33,7 +33,6 @@ const ManageMedicines = () => {
     setIsOpen(false);
   };
 
-  
   // Hook Form
   const {
     register,
@@ -63,15 +62,16 @@ const ManageMedicines = () => {
       shortDescription,
       category,
       company,
+      massUnit,
       itemMassUnit,
       perUnitPrice,
       discountPercentage,
       photoURL,
     } = data;
     // console.log(data);
-      // 1. Upload image and get image url
-      const image_url = await imageUpload(photoURL[0]);
-      // console.log(image_url);
+    // 1. Upload image and get image url
+    const image_url = await imageUpload(photoURL[0]);
+    // console.log(image_url);
 
     const medicineData = {
       addederEmail: email,
@@ -81,6 +81,7 @@ const ManageMedicines = () => {
       shortDescription,
       category,
       company,
+      massUnit,
       itemMassUnit,
       perUnitPrice,
       discountPercentage,
@@ -91,7 +92,7 @@ const ManageMedicines = () => {
     try {
       // Post request to server
       await mutateAsync(medicineData);
-      refetch()
+      refetch();
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -283,18 +284,36 @@ const ManageMedicines = () => {
                             <option value="Skf">Skf</option>
                           </select>
                         </div>
-                        <div>
-                          <select
-                            name="itemMassUnit"
-                            {...register("itemMassUnit", { required: true })}
-                            className="select select-success w-full "
-                          >
-                            <option disabled selected>
-                              Select Mass Unit
-                            </option>
-                            <option value="Mg">Mg</option>
-                            <option value="ML">ML</option>
-                          </select>
+
+                        <div className="flex">
+                          <div className="space-y-2 flex-1">
+                            {/* <label className="block text-sm">Per Unit Price</label> */}
+                            <input
+                              type="number"
+                              name="massUnit"
+                              placeholder="Mass Unit"
+                              className="w-full px-3 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+                              {...register("massUnit", { required: true })}
+                            />
+                            {errors.massUnit && (
+                              <span className="text-red-400">
+                                This field is required
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <select
+                              name="itemMassUnit"
+                              {...register("itemMassUnit", { required: true })}
+                              className="select select-success w-full "
+                            >
+                              <option disabled selected>
+                                Select Mass Unit
+                              </option>
+                              <option value="Mg">Mg</option>
+                              <option value="ML">ML</option>
+                            </select>
+                          </div>
                         </div>
 
                         <div className="space-y-2">
@@ -358,17 +377,6 @@ const ManageMedicines = () => {
                       </div>
                     </form>
                   </div>
-
-                  {/* modal close / submit btn */}
-                  {/* <div className="mt-4">
-                    <button
-                      type="button"
-                      className="bg-[#2fa325] hover:bg-green-300 hover:text-black text-white font-semibold  inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Submit
-                    </button>
-                  </div> */}
                 </DialogPanel>
               </TransitionChild>
             </div>
@@ -430,6 +438,12 @@ const ManageMedicines = () => {
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
+                      Mass Unit
+                    </th>
+                    {/* <th
+                      scope="col"
+                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    >
                       Delete
                     </th>
                     <th
@@ -437,17 +451,14 @@ const ManageMedicines = () => {
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Update
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
                   {/* <h1>{medicines?.length}</h1> */}
                   {/* medicines row data */}
                   {medicines.map((medicine) => (
-                    <MedicinesDataRows
-                      key={medicine._id}
-                      medicine={medicine}
-                    />
+                    <MedicinesDataRows key={medicine._id} medicine={medicine} />
                   ))}
                 </tbody>
               </table>

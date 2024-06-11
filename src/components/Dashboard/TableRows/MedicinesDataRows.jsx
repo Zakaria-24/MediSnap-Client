@@ -56,6 +56,11 @@ const MedicinesDataRows = ({ medicine }) => {
         <p className='text-gray-900 whitespace-no-wrap'>{medicine?.discountPercentage}%</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 whitespace-no-wrap'>
+          {medicine?.massUnit} <span>{medicine?.itemMassUnit}</span>
+          </p>
+      </td>
+      {/* <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
         //   onClick={() => setIsOpen(true)}
           className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
@@ -66,13 +71,13 @@ const MedicinesDataRows = ({ medicine }) => {
           ></span>
           <span className='relative'>Delete</span>
         </button>
-        {/* Delete modal */}
-        {/* <DeleteModal
+        Delete modal
+        <DeleteModal
           isOpen={isOpen}
           closeModal={closeModal}
           handleDelete={handleDelete}
           id={medicine?._id}
-        /> */}
+        />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
@@ -85,14 +90,14 @@ const MedicinesDataRows = ({ medicine }) => {
           ></span>
           <span className='relative'>Update</span>
         </button>
-        {/* Update Modal */}
-        {/* <UpdateMedicineModal
+        Update Modal
+        <UpdateMedicineModal
           isOpen={isEditModalOpen}
           setIsEditModalOpen={setIsEditModalOpen}
           medicine={medicine}
           refetch={refetch}
-        /> */}
-      </td>
+        />
+      </td> */}
     </tr>
   )
 }

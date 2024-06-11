@@ -7,6 +7,7 @@ import ManageAdvertisementDataRows from "../../../components/Dashboard/TableRows
 const Advertise = () => {
   const axiosSecure = useAxiosSecure();
 
+
   //   get All advertisement data
   const { data: manageAdvertisements = [], isLoading } = useQuery({
     queryKey: ["manageAdvertisements"],

@@ -103,8 +103,8 @@ const Register = () => {
       signInWithGoogle()
       .then((result) => {
         setUser(result.user);
-        const {displayName, email, photoURL} = result.user;
-        const userData = {displayName, email, photoURL, role:"user"}
+        const {displayName,password, email, photoURL} = result.user;
+        const userData = {displayName, email, password, photoURL, role:"user"}
         // console.log(userData);
         toast.success("Google Login Successfully with added userData");
         navigate("/");

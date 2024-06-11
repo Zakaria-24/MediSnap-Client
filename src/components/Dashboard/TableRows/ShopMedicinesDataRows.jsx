@@ -3,12 +3,14 @@ import { FaEye } from "react-icons/fa";
 import { GrSelect } from "react-icons/gr";
 import ShopMedicineDetailsModal from "../../Modal/ShopMedicineDetailsModal";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../shared/LoadingSpinner";
+import useAuth from "../../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 // eslint-disable-next-line react/prop-types
-const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
-    // console.log(medicine);
+const ShopMedicinesDataRows = ({ medicine, axiosCommon }) => {
+  const { user } = useAuth();
+
   // for delete modal
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -18,18 +20,62 @@ const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
     setIsOpen(false);
   };
 
-  //   get medicine data by specific id
-  const { data: medicineDetails = {}, isLoading } = useQuery({
-    queryKey: ["mediDetails", medicine?._id],
-    queryFn: async () => {
-      const { data } = await axiosCommon(`/mediDetails/${medicine?._id}`);
+  // // // Post Request for medicine
+  const { mutateAsync } = useMutation({
+    mutationFn: async (selectedData) => {
+      const { data } = await axiosCommon.post(`/selectedCart`, selectedData);
       return data;
     },
+    onSuccess: () => {
+      toast.success("Medicine Added to cart Successfully!");
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error("Something went wrong!");
+    },
   });
-    // console.log(medicineDetails);
 
+  // // select handler for selet a cart
+  const selectHandler = (select) => {
+    console.log(select);
+    const {
+      category,
+      company,
+      discountPercentage,
+      genericName,
+      itemMassUnit,
+      itemName,
+      massUnit,
+      perUnitPrice,
+      shortDescription,
+      photoURL,
+    } = select;
 
-    if(isLoading) return <LoadingSpinner/>
+    const selectedData = {
+      selecterEmail: user?.email,
+      selecterName: user?.displayName,
+      category,
+      company,
+      discountPercentage,
+      genericName,
+      itemMassUnit,
+      itemName,
+      massUnit,
+      perUnitPrice,
+      shortDescription,
+      photoURL,
+    };
+    console.log(selectedData)
+
+    try {
+      mutateAsync(selectedData);
+    } catch (err) {
+      console.log(err);
+      toast.err(err.message);
+    }
+  };
+
+  // if (isLoading) return <LoadingSpinner />;
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -74,7 +120,7 @@ const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
-          //   onClick={() => setIsOpen(true)}
+          onClick={() => selectHandler(medicine)}
           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
         >
           <span
@@ -85,13 +131,6 @@ const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
             <GrSelect />
           </span>
         </button>
-        {/* Delete modal */}
-        {/* <DeleteModal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          handleDelete={handleDelete}
-          id={medicine?._id}
-        /> */}
       </td>
       <td className="px-5 py-5 border-b border-gray-300 bg-white text-sm">
         <button
@@ -112,7 +151,7 @@ const ShopMedicinesDataRows = ({ axiosCommon, medicine }) => {
           isOpen={isOpen}
           closeModal={closeModal}
           medicine={medicine}
-          medicineDetails={medicineDetails}
+          // medicineDetails={medicineDetails}
         />
       </td>
     </tr>
@@ -123,6 +162,8 @@ ShopMedicinesDataRows.propTypes = {
   medicine: PropTypes.object,
   refetch: PropTypes.func,
   handleDelete: PropTypes.func,
+  axiosCommon: PropTypes.object,
+  // selectHandler: PropTypes.func,
 };
 
 export default ShopMedicinesDataRows;

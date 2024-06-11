@@ -19,6 +19,8 @@ const Shop = () => {
     },
   })
 
+  
+
   if (isLoading) return <LoadingSpinner />
   return (
     <>

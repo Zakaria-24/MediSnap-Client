@@ -9,11 +9,30 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Slide from "./Slide";
+import { useQuery } from '@tanstack/react-query';
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
+import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 
 const Carousel = () => {
-  const bgimg1 = "https://i.ibb.co/3hQKs6s/OIP-1.jpg";
-  const bgimg2 = "https://i.ibb.co/j50wG4P/2.jpg";
-  const bgimg3 = "https://i.ibb.co/bvPb5Zd/pexels-marcelochagas-2183773.jpg";
+const axiosCommon = useAxiosCommon()
+
+  // get all the "currentStatus: "success"" advertisement for slide section
+  const {data: sliderAdvertisement = [], isLoading } = useQuery({
+    queryKey: ["sliderAdvertisement"],
+    queryFn: async () => {
+const {data} = await axiosCommon(`/sliderAdvertisement`)
+
+return data
+    }
+  })
+  // console.log(sliderAdvertisement)
+
+  // by (filtering) all slideradvertisement to get just current status = "success" items
+  const successSlider = sliderAdvertisement.filter(item => item.currentStatus === "success")
+  // console.log(successSlider)
+
+if(isLoading) return <LoadingSpinner/>;
+
   return (
     <div className="container px-6 mt-0 mx-auto">
       <Swiper
@@ -31,24 +50,18 @@ const Carousel = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
+       {
+        successSlider.map((slider) => (
+          <SwiperSlide
+          key={slider?._id}>
           <Slide
-            image={bgimg1}
-            text="Expand Your Horizons. Find Better Alternatives for Every Need."
+            image={slider?.photoURL}
+            medicineName={slider?.medicineName}
+            description={slider?.description}
           />
         </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            image={bgimg2}
-            text="Unlock Endless Possibilities. Discover Better Alternatives Today."
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            image={bgimg3}
-            text="Capture the Moment. Explore Innovative Camera Alternatives."
-          />
-        </SwiperSlide>
+        ))
+       }
        
         
       </Swiper>

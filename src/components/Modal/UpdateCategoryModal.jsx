@@ -13,12 +13,7 @@ import { Fragment } from "react";
 import { imageUpload } from "../../api/utils";
 import { useForm } from "react-hook-form";
 
-const UpdateCategoryModal = ({
-  closeUpdateModal,
-  refetch,
-  isOpen,
-  category,
-}) => {
+const UpdateCategoryModal = ({ closeUpdateModal,refetch,isOpen,category}) => {
   const { categoryName, medicineName, description, price } = category;
   const axiosSecure = useAxiosSecure();
   //   Update

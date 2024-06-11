@@ -3,6 +3,7 @@ import Container from "../Container";
 // import useAuth from "../../../hooks/useAuth";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -15,8 +16,17 @@ const Navbar = () => {
       <li>
         <Link to="/shop">Shop</Link>
       </li>
+      {/* <li>
+        <Link to="/categoryDetails">Category Details</Link>
+      </li> */}
       <li>
-        <Link to="/shopCard">Shop Card</Link>
+        <Link to="/shopCard" className="text-2xl font-bold"><AiOutlineShoppingCart/></Link>
+      </li>
+      <li>
+        <Link to="/checkout">Checkout</Link>
+      </li>
+      <li>
+        <Link to="/invoice">Invoice</Link>
       </li>
       <li>
         {/* <details>
@@ -62,10 +72,12 @@ const Navbar = () => {
               {linkOption}
             </ul>
           </div>
-          <a className="text-3xl font-extrabold">
+          <Link
+          to={'/'}
+          className="text-3xl font-extrabold">
             <span className="text-4xl text-green-700">M</span>edi
             <span className=" text-green-600">Snap</span>
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{linkOption}</ul>
@@ -97,12 +109,13 @@ const Navbar = () => {
                   <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                  <button
+                  <Link
+                    to="/"                  
                     onClick={logOut}
                     className="bg-[#2fa325] text-white font-bold text-xl hover:text-[#2fa325]"
                   >
                     Logout
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>
