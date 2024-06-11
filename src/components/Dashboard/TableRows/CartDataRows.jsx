@@ -114,7 +114,7 @@ const openModal = () => {
           {/* Change Quantity Modal */}
           <UpdateMassUnitModal
             isMassOpen={isMassOpen}
-            closeModal={closeMassModal}
+            closeMassModal={closeMassModal}
             cart={cart}
             refetch={refetch}
             // medicineDetails={medicineDetails}
