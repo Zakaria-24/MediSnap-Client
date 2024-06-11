@@ -59,14 +59,14 @@ const ManageCategory = () => {
     // 1. Upload image and get image url
     const image_url = await imageUpload(photoURL[0]);
     // console.log(image_url);
-
+// const price = parseInt(price)
     const categorydata = {
       adminEmail: email,
       adminName: displayName,
       categoryName,
       medicineName,
       description,
-      price,
+      price: parseInt(price),
       photoURL: image_url,
     };
     console.log(categorydata);

@@ -83,11 +83,11 @@ const ManageMedicines = () => {
       company,
       massUnit,
       itemMassUnit,
-      perUnitPrice,
+      perUnitPrice: parseInt(perUnitPrice),
       discountPercentage,
       photoURL: image_url,
     };
-    // console.log(medicineData);
+    console.log(medicineData);
 
     try {
       // Post request to server
