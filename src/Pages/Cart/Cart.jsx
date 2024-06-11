@@ -23,10 +23,12 @@ const Cart = () => {
   //   },
   // });
 
-
-  const [cartData, refetch] = useSelectedCarts()
+  const [cartData, refetch] = useSelectedCarts();
   console.log(cartData);
-  const totalPrice = cartData.reduce((total, item) => total + item.perUnitPrice  , 0);
+  const totalPrice = cartData.reduce(
+    (total, item) => total + item.perUnitPrice,
+    0
+  );
   console.log(totalPrice);
 
   return (
@@ -38,12 +40,21 @@ const Cart = () => {
           <h1 className="flex justify-center text-2xl font-bold ">
             YOUR SELECTED MEDICINES INFO.{" "}
             <div className="flex items-center gap-x-2">
-            <span className="bg-green-600 px-2 py-1 rounded-xl text-white">
-              <h1>{cartData?.length}</h1>
-            </span>
-<span className="text-3xl font-bold text-green-400"> {totalPrice}$</span>
-            <span className="ml-2 text-3xl"><IoIosArrowRoundForward /></span>
-            <span  className="ml-2 text-2xl"><Link to="/checkout" className="text-3xl btn bg-green-600"><IoBagCheckOutline /></Link></span>
+              <span className="bg-green-600 px-2 py-1 rounded-xl text-white">
+                <h1>{cartData?.length}</h1>
+              </span>
+              <span className="text-3xl font-bold text-green-400">
+                {" "}
+                {totalPrice}$
+              </span>
+              <span className="ml-2 text-3xl">
+                <IoIosArrowRoundForward />
+              </span>
+              <span className="ml-2 text-2xl">
+                <Link to="/checkout" className="text-3xl btn bg-green-600">
+                  <IoBagCheckOutline />
+                </Link>
+              </span>
             </div>
           </h1>
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
