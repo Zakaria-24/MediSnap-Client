@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import ManageAdvertisementDataRows from "../../../components/Dashboard/TableRows/ManageAdvertisementDataRows";
+import { Helmet } from 'react-helmet-async';
 
 
 const Advertise = () => {
@@ -24,6 +25,9 @@ const Advertise = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <>
+     <Helmet>
+        <title>Advertisement management | for admin dashboard</title>
+      </Helmet>
       {/* show advertisement info  */}
       <div className="container mx-auto px-4 sm:px-8 ">
         <div className="py-8">

@@ -3,6 +3,7 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 
 const SellerHome = () => {
@@ -42,6 +43,10 @@ const SellerHome = () => {
       console.log(pendingPrice);
     
       return (
+        <>
+          <Helmet>
+        <title>Selers home | for seller dashboard</title>
+      </Helmet>
         <div className="mt-20">
           <div className="container mx-auto">
             {/* small cards */}
@@ -81,6 +86,7 @@ const SellerHome = () => {
             </div>
           </div>
         </div>
+        </>
       );
     };
     

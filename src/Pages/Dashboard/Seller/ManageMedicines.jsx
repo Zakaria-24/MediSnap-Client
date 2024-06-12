@@ -17,6 +17,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import MedicinesDataRows from "../../../components/Dashboard/TableRows/MedicinesDataRows";
+import { Helmet } from "react-helmet-async";
 
 const ManageMedicines = () => {
   const axiosSecure = useAxiosSecure();
@@ -141,6 +142,9 @@ const ManageMedicines = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Manage medicine | for seller dashboard</title>
+      </Helmet>
       {/* Add medicine btn */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="p-6 py-12 bg-green-100">

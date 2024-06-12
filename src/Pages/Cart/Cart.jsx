@@ -6,6 +6,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import useSelectedCarts from "../../hooks/useSelectedCarts";
+import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
   // const { user } = useAuth();
@@ -33,7 +34,9 @@ const Cart = () => {
 
   return (
     <>
-      <h1></h1>
+    <Helmet>
+        <title>Your all selected cart</title>
+      </Helmet>
       {/* show specific seller medicines info  */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">

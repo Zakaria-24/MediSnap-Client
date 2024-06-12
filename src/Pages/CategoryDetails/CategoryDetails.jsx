@@ -5,6 +5,7 @@ import CategoryDetailsDataRow from "../../components/Dashboard/TableRows/Categor
 // import CategoryRelatedCart from "./CategoryRelatedCart";
 import CategoryCart from "../../components/CategoryCart/CategoryCart";
 import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import { Helmet } from 'react-helmet-async';
 
 const CategoryDetails = () => {
   const axiosCommon = useAxiosCommon();
@@ -42,6 +43,9 @@ const CategoryDetails = () => {
 
   return (
     <>
+     <Helmet>
+        <title>medi specific category details</title>
+      </Helmet>
       {/* show category info  */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">

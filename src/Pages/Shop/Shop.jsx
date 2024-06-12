@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import ShopMedicinesDataRows from '../../components/Dashboard/TableRows/ShopMedicinesDataRows';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
+import { Helmet } from 'react-helmet-async';
 
 const Shop = () => {
     const axiosCommon = useAxiosCommon()
@@ -24,6 +25,9 @@ const Shop = () => {
   if (isLoading) return <LoadingSpinner />
   return (
     <>
+    <Helmet>
+        <title>See all shop cart</title>
+      </Helmet>
         {/* show all medicines info  */}
         <div className="container mx-auto px-4 sm:px-8">
         {/* <Helmet>

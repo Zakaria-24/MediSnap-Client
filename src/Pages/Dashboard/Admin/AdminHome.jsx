@@ -2,6 +2,7 @@ import { FaDollarSign } from "react-icons/fa";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 
 const AdminHome = () => {
@@ -38,6 +39,10 @@ const AdminHome = () => {
 //   console.log(pendingPrice);
 
   return (
+    <>
+     <Helmet>
+        <title>medi snap | admin home</title>
+      </Helmet>
     <div className="mt-20">
       <div className="container mx-auto">
         {/* small cards */}
@@ -77,6 +82,7 @@ const AdminHome = () => {
         </div>
       </div>
     </div>
+              </>
   );
 };
 

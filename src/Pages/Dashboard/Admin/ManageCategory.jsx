@@ -14,6 +14,7 @@ import {
 } from "@headlessui/react";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import CategoryDataRows from "../../../components/Dashboard/TableRows/CategoryDataRows";
+import { Helmet } from 'react-helmet-async';
 
 const ManageCategory = () => {
   const axiosSecure = useAxiosSecure();
@@ -126,6 +127,9 @@ const ManageCategory = () => {
 
   return (
     <>
+    <Helmet>
+        <title>Manage Category | for admin dashboard</title>
+      </Helmet>
       {/* Add medicine btn */}
       <div className="container mx-auto px-4 sm:px-8">
         <div className="p-6 py-12 bg-green-100">

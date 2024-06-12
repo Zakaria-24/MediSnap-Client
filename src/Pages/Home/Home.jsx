@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import CategoryCard from "./CategorySection/Category";
 import Discount from "./DiscountSection/Discount";
 import Carousel from "./SliderSection/Carousel";
@@ -6,6 +7,9 @@ import Carousel from "./SliderSection/Carousel";
 const Home = () => {
     return (
         <>
+        <Helmet>
+        <title>MediSnap | multi-vendor medicine seller</title>
+      </Helmet>
             {/* slider */}
             <Carousel/>
 

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import SeleReportDataRows from "../../../components/Dashboard/TableRows/SeleReportDataRows";
+import { Helmet } from "react-helmet-async";
 
 const SalesReport = () => {
     const axiosSecure = useAxiosSecure();
@@ -18,6 +19,10 @@ console.log(seles)
 
 if(isLoading) return <LoadingSpinner/>;
     return (
+      <>
+      <Helmet>
+        <title>Seles report | for admin dashboard</title>
+      </Helmet>
         <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -40,7 +45,7 @@ if(isLoading) return <LoadingSpinner/>;
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
-                    >
+                      >
                       Buyer Email
                     </th>
                     <th
@@ -64,6 +69,7 @@ if(isLoading) return <LoadingSpinner/>;
           </div>
         </div>
       </div>
+                      </>
     );
 };
 

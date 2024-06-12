@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SellerPaymentHistoryDataRows from "../../../components/Dashboard/TableRows/SellerPaymentHistoryDataRows";
+import { Helmet } from "react-helmet-async";
 
 
 const PaymentHistory = () => {
@@ -19,6 +20,9 @@ const PaymentHistory = () => {
 
     return (
         <>
+          <Helmet>
+        <title>Payment History | for seller dashboard</title>
+      </Helmet>
         {/* show payment info  */}
         <div className="container mx-auto px-4 sm:px-8 ">
           <div className="py-8">

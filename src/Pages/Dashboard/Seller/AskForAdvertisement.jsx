@@ -14,6 +14,7 @@ import {
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import AdvertisementDataRows from "../../../components/Dashboard/TableRows/AdvertisementDataRows";
+import { Helmet } from "react-helmet-async";
 
 const AskForAdvertisement = () => {
   const axiosSecure = useAxiosSecure();
@@ -120,6 +121,9 @@ const AskForAdvertisement = () => {
 
   return (
     <>
+    <Helmet>
+        <title>Ask for advertisement | for seller dashboard</title>
+      </Helmet>
       <div
         className="hero min-h-1.5"
         style={{ backgroundImage: "url(https://i.ibb.co/PGgjyV5/medi.jpg)" }}

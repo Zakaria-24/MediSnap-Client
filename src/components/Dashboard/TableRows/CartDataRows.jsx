@@ -4,11 +4,12 @@ import UpdateMassUnitModal from "../../Modal/UpdateMassUnitModal";
 import { RiExpandUpDownFill } from "react-icons/ri";
 import { FcDeleteRow } from "react-icons/fc";
 import { useMutation } from "@tanstack/react-query";
-import { axiosSecure } from "../../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import DeleteModal from "../../Modal/DeleteModal";
 
 const CartDataRows = ({ cart, refetch }) => {
+  const axiosSecure = useAxiosSecure()
   // For Modal
   const [isMassOpen, setIsMassOpen] = useState(false);
   const openMassModal = () => {

@@ -3,6 +3,7 @@ import useSelectedCarts from "../../hooks/useSelectedCarts";
 import PaymentForm from "../../components/Form/PaymentForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Helmet } from "react-helmet-async";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = () => {
@@ -15,6 +16,10 @@ const Checkout = () => {
   console.log(totalPrice);
 
   return (
+    <>
+    <Helmet>
+        <title>CheckOut | pay for medicine</title>
+      </Helmet>
     <div className="container mx-auto px-4 sm:px-8 pt-16 ">
       {/* show specific seller medicines info  */}
       <div>
@@ -47,11 +52,11 @@ const Checkout = () => {
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Medicine Name
-                    </th>
-                    <th
+                      </th>
+                      <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
-                    >
+                      >
                       Category
                     </th>
                     <th
@@ -76,17 +81,17 @@ const Checkout = () => {
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Discount
+                    Discount
                     </th>
                     <th
-                      scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    scope="col"
+                    className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
-                      Mass Unit
+                    Mass Unit
                     </th>
                     <th
-                      scope="col"
-                      className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
+                    scope="col"
+                    className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Delete
                     </th>
@@ -94,13 +99,13 @@ const Checkout = () => {
                 </thead>
                 <tbody>
 
-                  {cartData.map((cart) => (
+                {cartData.map((cart) => (
                     <CartDataRows
                       key={cart._id}
                       cart={cart}
                       refetch={refetch}
-                    />
-                  ))}
+                      />
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -113,6 +118,7 @@ const Checkout = () => {
         <PaymentForm />
       </Elements>
     </div>
+                    </>
   );
 };
 
