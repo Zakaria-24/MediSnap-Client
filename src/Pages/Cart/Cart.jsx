@@ -9,20 +9,6 @@ import useSelectedCarts from "../../hooks/useSelectedCarts";
 import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
-  // const { user } = useAuth();
-  // const axiosSecure = useAxiosSecure();
-
-  // const { data: cartData = [], refetch } = useQuery({
-  //   queryKey: ["CartData"],
-  //   queryFn: async () => {
-  //     const { data } = await axiosSecure(`/selectedCarts/${user?.email}`);
-  //     return data;
-
-  //     // const response = await fetch('http://localhost:8000/api/v1/medicines/cart');
-  //     // const data = await response.json();
-  //     // return data.data;
-  //   },
-  // });
 
   const [cartData, refetch] = useSelectedCarts();
   console.log(cartData);
