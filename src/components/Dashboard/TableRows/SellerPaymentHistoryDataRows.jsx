@@ -1,13 +1,28 @@
 /* eslint-disable react/prop-types */
 
-const PaymentHistoryDataRows = ({payment}) => {
-    console.log(payment)
+
+const SellerPaymentHistoryDataRows = ({payment}) => {
     return (
         <>
         <tr>
           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
             <p className="text-gray-900 whitespace-no-wrap">
               {payment?.transactionId}
+            </p>
+          </td>
+          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p className="text-gray-900 whitespace-no-wrap">
+              {payment?.email}
+            </p>
+          </td>
+          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p className="text-gray-900 whitespace-no-wrap">
+              {payment?.price}
+            </p>
+          </td>
+          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p className="text-gray-900 whitespace-no-wrap">
+              {payment?.date}
             </p>
           </td>
           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -29,4 +44,4 @@ const PaymentHistoryDataRows = ({payment}) => {
     );
 };
 
-export default PaymentHistoryDataRows;
+export default SellerPaymentHistoryDataRows;

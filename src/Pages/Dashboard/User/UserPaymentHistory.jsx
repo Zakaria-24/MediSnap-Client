@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import PaymentHistoryDataRows from '../../../components/Dashboard/TableRows/PaymentHistoryDataRows';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import UserPaymentHistoryDataRows from '../../../components/Dashboard/TableRows/UserPaymentHistoryDataRows';
 
 const UserPaymentHistory = () => {
 const {user} = useAuth()
@@ -9,9 +9,9 @@ const axiosSecure = useAxiosSecure()
 
 // get all payment history by specific use by email
 const {data: UserPaymentHistory = [] } = useQuery({
-    queryKey: ['paymentHistory', user?.email ],
+    queryKey: ['userPaymentHistory', user?.email ],
     queryFn: async () => {
-        const {data} = await axiosSecure(`/paymentHistory/${user?.email}`)
+        const {data} = await axiosSecure(`/userPaymentHistory/${user?.email}`)
         return data
     }
 })
@@ -51,7 +51,7 @@ console.log(UserPaymentHistory)
                   <tbody>
                     {/* advertisement row data */}
                     {UserPaymentHistory.map((payment) => (
-                      <PaymentHistoryDataRows
+                      <UserPaymentHistoryDataRows
                         key={payment._id}
                         payment={payment}
                       />
