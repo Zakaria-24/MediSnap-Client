@@ -95,6 +95,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "adminHome",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AdminHome />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "manageUsers",
         element: (
           <PrivateRoute>
@@ -147,6 +157,16 @@ const router = createBrowserRouter([
       // sales routes
       {
         index: true,
+        path: "sellerHome",
+        element: (
+          <PrivateRoute>
+            <SellerRoute>
+              <SellerHome />,
+            </SellerRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "sellerHome",
         element: (
           <PrivateRoute>
