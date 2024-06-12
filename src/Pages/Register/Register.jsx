@@ -50,13 +50,16 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { fullName, photoURL, email, password, role } = data;
+    
     console.log(role);
 
-    const userData= {
-      ...data
-    }
+    // const userData= {
+    //   // ...data
+    //   fullName, image_url, email, password, role
+    // }
 
     try {
+     
       setLoading(true);
       // 1. Upload image and get image url
       const image_url = await imageUpload(photoURL[0]);
@@ -71,6 +74,10 @@ const Register = () => {
       navigate("/");
       toast.success("Registered Successfully");
 
+      const userData= {
+        // ...data
+        fullName, photoURL: image_url, email, password, role
+      }
         //   Post request to server
         await mutateAsync(userData)
     } catch (err) {
@@ -78,25 +85,6 @@ const Register = () => {
       toast.error(err.message);
     }
   };
-
-  // // handle google signin
-  // const handleGoogleSignIn = async () => {
-  //   // const userData= {
-  //   //   ...data
-  //   // }
-
-  //   try {
-  //     await signInWithGoogle();
-
-  //     navigate("/");
-  //     toast.success("Signup Successful");
-  //     //   Post request to server
-  //     // await mutateAsync(userData)
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err.message);
-  //   }
-  // };
 
     // google login
     const handleGoogleSignIn = () => {

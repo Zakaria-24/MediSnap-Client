@@ -13,7 +13,7 @@ const PaymentForm = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   // for show price in pay btn
-  const [cartData] = useSelectedCarts();
+  const [cartData ] = useSelectedCarts();
   // console.log(cartData);
 
 // array to string (email) from cartData
@@ -130,10 +130,21 @@ const PaymentForm = () => {
         status: "pending",
       };
       console.log(paymentInfo);
+
+// delete paymentInfo.transactionId
+
       try {
         // 2. save payment info in booking collection (db)
         const { data } = await axiosSecure.post("/payment", paymentInfo);
         console.log(data);
+
+        // // 3. change room status to booked in db
+        // await axiosSecure.patch(`/payment/status/${paymentInfo?.transactionId}`, {
+        //   status: "paid",
+        // })
+
+        // // update ui
+        // refetch()
 
         toast.success("Payment Successfully");
         navigate("/invoice");

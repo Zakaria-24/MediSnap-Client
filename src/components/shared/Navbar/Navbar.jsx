@@ -20,7 +20,9 @@ const Navbar = () => {
         <Link to="/categoryDetails">Category Details</Link>
       </li> */}
       <li>
-        <Link to="/shopCard" className="text-2xl font-bold"><AiOutlineShoppingCart/></Link>
+        <Link to="/shopCard" className="text-2xl font-bold">
+          <AiOutlineShoppingCart />
+        </Link>
       </li>
       <li>
         <Link to="/checkout">Checkout</Link>
@@ -72,11 +74,22 @@ const Navbar = () => {
               {linkOption}
             </ul>
           </div>
-          <Link
-          to={'/'}
-          className="text-3xl font-extrabold">
-            <span className="text-4xl text-green-700">M</span>edi
-            <span className=" text-green-600">Snap</span>
+          <Link to={"/"} className="text-3xl font-extrabold">
+            <div className="flex justify-center items-center">
+              <div>
+                <span>
+                  <img
+                    className="w-14 h-14"
+                    src="https://i.ibb.co/PwmGpGb/medi-snap-logo.jpg"
+                    alt=""
+                  />
+                </span>
+              </div>
+              <div>
+                <span className="text-4xl text-green-700">M</span>edi
+                <span className=" text-green-600">Snap</span>
+              </div>
+            </div>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -110,7 +123,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/"                  
+                    to="/"
                     onClick={logOut}
                     className="bg-[#2fa325] text-white font-bold text-xl hover:text-[#2fa325]"
                   >

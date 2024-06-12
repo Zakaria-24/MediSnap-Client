@@ -97,7 +97,8 @@ const CategoryDetails = () => {
                 <tbody>
                   {/* category Details data row data */}
                   <CategoryDetailsDataRow 
-                  categoryDetails={categoryDetails} 
+                  categoryDetails={categoryDetails}
+                  axiosCommon={axiosCommon} 
                   />
                 </tbody>
               </table>
@@ -109,10 +110,6 @@ const CategoryDetails = () => {
         <h1 className=" text-3xl font-bold flex justify-center">
           See Related All Data{" "}
         </h1>
-        {/* {categoryName.map((category) => {
-          return <CategoryCart key={category._id} category={category} />;
-        })} */}
-        {/* <CategoryReelatedCart /> */}
 
         <div className="container mx-auto pt-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {categoryName.map((category) => (

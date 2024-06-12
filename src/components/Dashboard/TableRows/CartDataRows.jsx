@@ -84,19 +84,19 @@ const openModal = () => {
             {cart?.shortDescription}
           </p>
         </td>
-        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <p className="text-gray-900 whitespace-no-wrap">{cart?.company}</p>
-        </td>
+        </td> */}
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <p className="text-gray-900 whitespace-no-wrap">
             ${cart?.perUnitPrice}
           </p>
         </td>
-        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <p className="text-gray-900 whitespace-no-wrap">
             {cart?.discountPercentage}%
           </p>
-        </td>
+        </td> */}
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <button
             onClick={openMassModal}

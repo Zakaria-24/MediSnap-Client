@@ -86,24 +86,24 @@ const Cart = () => {
                     >
                       Description
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Company
-                    </th>
+                    </th> */}
                     <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Price
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
                     >
                       Discount
-                    </th>
+                    </th> */}
                     <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"
