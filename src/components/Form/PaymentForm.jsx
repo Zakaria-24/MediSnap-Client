@@ -14,7 +14,22 @@ const PaymentForm = () => {
   const axiosSecure = useAxiosSecure();
   // for show price in pay btn
   const [cartData] = useSelectedCarts();
-  console.log(cartData);
+  // console.log(cartData);
+
+// array to string (email) from cartData
+  const arrayOfEmail= cartData.map((item) => item?.SellerEmail)
+  const uniqueArrayOfEmail = [...new Set(arrayOfEmail)]
+  // uniqueSellerEmail convert to string
+  const sellerEmail = uniqueArrayOfEmail.toString()
+  console.log(sellerEmail)
+
+// array to string (itemName) from cartData
+  const arrayOfItemName= cartData.map((item) => item?.itemName)
+  const uniqueArrayOfItemName = [...new Set(arrayOfItemName)]
+  // uniqueItemName convert to string
+  const itemName = uniqueArrayOfItemName.toString()
+  console.log(itemName)
+
   const totalPrice = cartData.reduce(
     (total, item) => total + item.perUnitPrice,
     0
@@ -106,13 +121,12 @@ const PaymentForm = () => {
       // 1. Create payment info object
       // now save the payment in the database
       const paymentInfo = {
-        name: user.displayName,
-        email: user.email,
+        buyerEmail: user.email,
         price: totalPrice,
         transactionId: paymentIntent.id,
         date: new Date(), // utc date convert. use moment js to
-        cartIds: cartData.map((item) => item._id),
-        category: cartData.map((item) => item.category),
+        sellerEmail: sellerEmail,
+        itemName: itemName,
         status: "pending",
       };
       console.log(paymentInfo);

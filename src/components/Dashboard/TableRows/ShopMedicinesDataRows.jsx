@@ -49,11 +49,13 @@ const ShopMedicinesDataRows = ({ medicine, axiosCommon }) => {
       perUnitPrice,
       shortDescription,
       photoURL,
+      addederEmail
     } = select;
 
     const selectedData = {
       selecterEmail: user?.email,
       selecterName: user?.displayName,
+      SellerEmail: addederEmail,
       category,
       company,
       discountPercentage,
