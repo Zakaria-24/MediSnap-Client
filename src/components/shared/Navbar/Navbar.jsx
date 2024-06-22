@@ -4,32 +4,46 @@ import Container from "../Container";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import useRole from './../../../hooks/useRole';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [role] = useRole()
+  console.log(role)
 
   const linkOption = (
-    <div className=" lg:flex text-lg font-medium ">
-      <li>
-        <Link to="/">Home</Link>
+    <div className=" lg:flex text-lg font-medium">
+      
+      {
+        role === "user" ?  <>
+ <li>
+        <Link to="/" className="hover:text-green-600 hover:bg-base-100">Home</Link>
       </li>
       <li>
-        <Link to="/shop">Shop</Link>
+        <Link to="/shop" className="hover:text-green-600 hover:bg-base-100">Shop</Link>
       </li>
-      {/* <li>
-        <Link to="/categoryDetails">Category Details</Link>
-      </li> */}
-      <li>
-        <Link to="/shopCard" className="text-2xl font-bold">
+        <li>
+        <Link to="/shopCard" className="text-2xl font-bold hover:text-green-600 hover:bg-base-100">
           <AiOutlineShoppingCart />
         </Link>
       </li>
       <li>
-        <Link to="/checkout">Checkout</Link>
+        <Link to="/checkout" className="hover:text-green-600 hover:bg-base-100">Checkout</Link>
       </li>
       <li>
-        <Link to="/invoice">Invoice</Link>
+        <Link to="/invoice" className="hover:text-green-600 hover:bg-base-100">Invoice</Link>
       </li>
+
+        </> : <>
+        <li>
+        <Link to="/" className="hover:text-green-600 hover:bg-base-100">Home</Link>
+      </li>
+      <li>
+        <Link to="/shop" className="hover:text-green-600 hover:bg-base-100">Shop</Link>
+      </li>
+        </>
+      }
+     
       <li>
         {/* <details>
           <summary>Languages</summary>
@@ -47,8 +61,8 @@ const Navbar = () => {
   );
 
   return (
-    <Container>
-      <div className="navbar bg-base-100 pt-4">
+    <>
+      <div className="navbar bg-green-50 px-20 pt-4">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -92,9 +106,11 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
+        {/* navbar middle */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{linkOption}</ul>
         </div>
+        
         {/* Navbar end */}
         <div className="navbar-end">
           {user ? (
@@ -116,16 +132,20 @@ const Navbar = () => {
                 className="mt-3 z-[10] p-2 shadow menu menu-sm dropdown-content bg-green-100 rounded-box w-52"
               >
                 <li>
-                  <Link className="justify-between">Update Profile</Link>
+                  <Link to="/updateProfile"
+                  className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
+                  >Update Profile</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/dashboard"
+                  className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
+                  >Dashboard</Link>
                 </li>
                 <li>
                   <Link
                     to="/"
                     onClick={logOut}
-                    className="bg-[#2fa325] text-white font-bold text-xl hover:text-[#2fa325]"
+                    className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
                   >
                     Logout
                   </Link>
@@ -142,7 +162,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </Container>
+    </>
   );
 };
 

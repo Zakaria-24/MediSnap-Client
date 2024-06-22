@@ -24,6 +24,7 @@ import ManageCategory from "../Pages/Dashboard/Admin/ManageCategory";
 import Checkout from "../Pages/Checkout/Checkout";
 import Invoice from "../Pages/Invoice/Invoice";
 import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
+import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
         path: "/invoice",
         element: <Invoice />,
       },
+      {
+        path: "/updateProfile",
+        element: <UpdateProfile />,
+      },
     ],
   },
   {
@@ -75,6 +80,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  
   {
     path: "/dashboard",
     element: (
