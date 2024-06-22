@@ -102,7 +102,7 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 ">
           
-          <Link to={"/"} className="text-3xl font-extrabold">
+          <Link to={"/"} className="text-3xl font-extrabold md:hidden">
             <div className="flex justify-center items-center">
               <div>
                 <span>
