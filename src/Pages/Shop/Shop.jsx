@@ -29,7 +29,7 @@ const Shop = () => {
         <title>See all shop cart</title>
       </Helmet>
         {/* show all medicines info  */}
-        <div className="container mx-auto px-4 sm:px-8">
+        <div className="container mx-auto px-4 mt-16 sm:px-8">
         {/* <Helmet>
           <title>Manage Users</title>
         </Helmet> */}

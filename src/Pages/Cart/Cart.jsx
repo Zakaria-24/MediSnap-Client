@@ -24,7 +24,7 @@ const Cart = () => {
         <title>Your all selected cart</title>
       </Helmet>
       {/* show specific seller medicines info  */}
-      <div className="container mx-auto px-4 sm:px-8">
+      <div className="container mx-auto px-4 mt-16 sm:px-8">
         <div className="py-8">
           <h1 className="flex justify-center text-2xl font-bold ">
             YOUR SELECTED MEDICINES INFO.{" "}

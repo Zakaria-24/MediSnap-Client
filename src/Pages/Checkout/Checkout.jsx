@@ -20,7 +20,7 @@ const Checkout = () => {
     <Helmet>
         <title>CheckOut | pay for medicine</title>
       </Helmet>
-    <div className="container mx-auto px-4 sm:px-8 pt-16 ">
+    <div className="container mx-auto px-4 mt-16 sm:px-8 ">
       {/* show specific seller medicines info  */}
       <div>
         <h1 className="text-2xl font-bold ">YOUR HAVE TO PAY...</h1>

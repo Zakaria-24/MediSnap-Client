@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 // import required modules
-import { FreeMode, Pagination } from "swiper/modules";
+import {Autoplay, FreeMode, Pagination } from "swiper/modules";
 
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
@@ -27,12 +27,6 @@ const Discount = () => {
   });
   console.log(discount);
 
-  // by (filtering) all medicines data to get just discountPercentage = "!0"
-  // const discountData = discount.filter(
-  //   (item) => item.discountPercentage !== "0"
-  // );
-  // console.log(discountData);
-
   if (isloading) return <LoadingSpinner />;
   return (
     <div className=" container mx-auto px-4 lg:px-0 py-8">
@@ -41,10 +35,15 @@ const Discount = () => {
         slidesPerView={3}
         spaceBetween={30}
         freeMode={true}
+        loop={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           clickable: true,
         }}
-        modules={[FreeMode, Pagination]}
+        modules={[FreeMode, Pagination, Autoplay]}
         className="mySwiper"
       >
         {/* {} */}
