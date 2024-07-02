@@ -29,9 +29,9 @@ const Navbar = () => {
       <li>
         <Link to="/checkout" className="hover:text-green-600 hover:bg-base-100">Checkout</Link>
       </li>
-      {/* <li>
+      <li>
         <Link to="/invoice" className="hover:text-green-600 hover:bg-base-100">Invoice</Link>
-      </li> */}
+      </li>
 
         </> : <>
         <li>
