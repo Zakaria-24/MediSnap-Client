@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import CategoryCard from "./CategorySection/Category";
 import Discount from "./DiscountSection/Discount";
+import CustomarsReview from "./ExtraSection/CustomarsReview";
 import Carousel from "./SliderSection/Carousel";
 
 
@@ -20,7 +21,8 @@ const Home = () => {
             <Discount/>
 
 
-            {/*  two extra sections */}
+            {/* extra sections */}
+            <CustomarsReview />
         </>
     );
 };
