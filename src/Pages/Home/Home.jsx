@@ -3,6 +3,7 @@ import CategoryCard from "./CategorySection/Category";
 import Discount from "./DiscountSection/Discount";
 import CustomarsReview from "./ExtraSection/CustomarsReview";
 import Carousel from "./SliderSection/Carousel";
+import FrequentlyAskQuestion from "./ExtraSection/FrequentlyAskQuestion";
 
 
 const Home = () => {
@@ -23,6 +24,8 @@ const Home = () => {
 
             {/* extra sections */}
             <CustomarsReview />
+            <FrequentlyAskQuestion/>
+            
         </>
     );
 };
