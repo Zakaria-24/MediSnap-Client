@@ -44,6 +44,7 @@ const Navbar = () => {
       }
      
       <li>
+        {/* TODO  */}
         {/* <details>
           <summary>Languages</summary>
           <ul className="p-2">
@@ -131,9 +132,10 @@ const Navbar = () => {
                 className="mt-3 z-[10] p-2 shadow menu menu-sm dropdown-content bg-green-100 rounded-box w-52"
               >
                 <li>
-                  <Link to="/updateProfile"
+                  {/* TODO  */}
+                  {/* <Link to="/updateProfile"
                   className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
-                  >Update Profile</Link>
+                  >Update Profile</Link> */}
                 </li>
                 <li>
                   <Link to="/dashboard"
