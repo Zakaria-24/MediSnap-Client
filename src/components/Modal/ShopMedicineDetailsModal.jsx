@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 
-const ShopMedicineDetailsModal = ({ isOpen, closeModal, medicineDetails }) => {
+const ShopMedicineDetailsModal = ({ isOpen, closeModal, medicine }) => {
    
     
   return (
@@ -50,28 +50,28 @@ const ShopMedicineDetailsModal = ({ isOpen, closeModal, medicineDetails }) => {
                   {/* <medicine details Modal Form /> */}
                   <div className="max-w-xs p-6 rounded-md shadow-md mx-auto bg-green-50 ">
                     <img
-                      src={medicineDetails?.photoURL}
+                      src={medicine?.photoURL}
                       alt=""
                       className="object-cover object-center w-full rounded-md h-32"
                     />
                     <div className="mt-6 mb-2">
                       <span className="  tracking-wide ">
-                      <span className=" text-sm font-semibold">Category Name:</span> {medicineDetails?.category} - {medicineDetails?.itemMassUnit} _ ${medicineDetails?.perUnitPrice}
+                      <span className=" text-sm font-semibold">Category Name:</span> {medicine?.category} - {medicine?.itemMassUnit} _ ${medicine?.perUnitPrice}
                       </span>
                       <br />
                       <span className="  tracking-wide ">
-                      <span className=" text-sm font-semibold">Genaric Name:</span> {medicineDetails?.genericName}
+                      <span className=" text-sm font-semibold">Genaric Name:</span> {medicine?.genericName}
                       </span>
                       <br />
                       <span className="  tracking-wide ">
-                      <span className=" text-sm font-semibold">Company Name:</span> {medicineDetails?.company}
+                      <span className=" text-sm font-semibold">Company Name:</span> {medicine?.company}
                       </span>
                       <h2 className="tracking-wide">
-                        <span className="text-lg font-semibold">Medicine:</span> {medicineDetails?.itemName}
+                        <span className="text-lg font-semibold">Medicine:</span> {medicine?.itemName}
                       </h2>
                     </div>
                     <p className="">
-                      {medicineDetails?.shortDescription}
+                      {medicine?.shortDescription}
                     </p>
                   </div>
 
@@ -98,7 +98,7 @@ const ShopMedicineDetailsModal = ({ isOpen, closeModal, medicineDetails }) => {
 ShopMedicineDetailsModal.propTypes = {
  isOpen: PropTypes.bool,
  closeModal: PropTypes.func,
- medicineDetails: PropTypes.object,
+ medicine: PropTypes.object,
   }
 
 export default ShopMedicineDetailsModal;
