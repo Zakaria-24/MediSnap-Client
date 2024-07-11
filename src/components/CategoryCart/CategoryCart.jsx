@@ -32,11 +32,11 @@ const CategoryCart = ({ category }) => {
             alt="category"
             className=" rounded-lg h-52 w-full"
           />
-          <div className="bg-green-100 text-center py-4">
+          <div className="bg-green-300 text-center py-4">
             <h1 className="text-xl font-bold">{categoryName}</h1>
             <Link
               to={`/categoryDetails/${category?._id}`}
-              className="btn bg-base-200 hover:bg-green-500"
+              className="btn bg-green-100 hover:bg-green-400"
             >
               View More
             </Link>

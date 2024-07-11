@@ -147,7 +147,7 @@ const ManageMedicines = () => {
       </Helmet>
       {/* Add medicine btn */}
       <div className="container mx-auto px-4 sm:px-8">
-        <div className="p-6 py-12 bg-green-100">
+        <div className="p-6 py-12 bg-green-300">
           <div className="container mx-auto">
             <div className="flex flex-col lg:flex-row items-center justify-between">
               <h2 className="text-center text-6xl tracking-tighter font-bold">
@@ -156,7 +156,7 @@ const ManageMedicines = () => {
               <button
                 type="button"
                 onClick={openModal}
-                className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-[#2fa325] hover:bg-green-300 hover:text-black text-white font-semibold"
+                className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-green-500 hover:bg-green-100 hover:text-black text-white font-semibold"
               >
                 Add Medicine
               </button>
@@ -395,7 +395,7 @@ const ManageMedicines = () => {
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>
-                  <tr className="bg-green-100">
+                  <tr className="bg-green-300">
                     <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"

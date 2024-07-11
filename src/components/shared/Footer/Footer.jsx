@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer className="footer p-10 px-16 text-base-content bg-green-100">
+      <footer className="footer p-10 px-16 text-base-content
+       bg-green-300" >
         <aside>
           <Link to={"/"} className="text-3xl font-extrabold">
             <div className="flex justify-center items-center">

@@ -35,7 +35,7 @@ console.log(UserPaymentHistory)
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table className="min-w-full leading-normal">
                   <thead>
-                    <tr className="bg-green-100">
+                    <tr className="bg-green-300">
                       
                       <th
                         scope="col"

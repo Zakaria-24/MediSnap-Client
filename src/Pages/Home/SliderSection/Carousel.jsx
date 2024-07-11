@@ -34,7 +34,7 @@ return data
 if(isLoading) return <LoadingSpinner/>;
 
   return (
-    <div className="mt-16 mx-auto">
+    <div className="mt-14 mx-auto">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

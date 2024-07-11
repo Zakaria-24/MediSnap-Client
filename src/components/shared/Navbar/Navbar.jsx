@@ -16,29 +16,29 @@ const Navbar = () => {
       {
         role === "user" ?  <>
  <li>
-        <Link to="/" className="hover:text-green-600 hover:bg-base-100">Home</Link>
+        <Link to="/" className="hover:text-green-600 hover:bg-green-100 ">Home</Link>
       </li>
       <li>
-        <Link to="/shop" className="hover:text-green-600 hover:bg-base-100">Shop</Link>
+        <Link to="/shop" className="hover:text-green-600 hover:bg-green-100">Shop</Link>
       </li>
         <li>
-        <Link to="/shopCard" className="text-2xl font-bold hover:text-green-600 hover:bg-base-100">
+        <Link to="/shopCard" className="text-2xl font-bold hover:text-green-600 hover:bg-green-100">
           <AiOutlineShoppingCart />
         </Link>
       </li>
       <li>
-        <Link to="/checkout" className="hover:text-green-600 hover:bg-base-100">Checkout</Link>
+        <Link to="/checkout" className="hover:text-green-600 hover:bg-green-100">Checkout</Link>
       </li>
       <li>
-        <Link to="/invoice" className="hover:text-green-600 hover:bg-base-100">Invoice</Link>
+        <Link to="/invoice" className="hover:text-green-600 hover:bg-green-100">Invoice</Link>
       </li>
 
         </> : <>
         <li>
-        <Link to="/" className="hover:text-green-600 hover:bg-base-100">Home</Link>
+        <Link to="/" className="hover:text-green-600 hover:bg-green-100">Home</Link>
       </li>
       <li>
-        <Link to="/shop" className="hover:text-green-600 hover:bg-base-100">Shop</Link>
+        <Link to="/shop" className="hover:text-green-600 hover:bg-green-100">Shop</Link>
       </li>
         </>
       }
@@ -62,7 +62,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-green-50 px-6 pt-2 fixed z-10">
+      <div className="navbar bg-green-300 px-6 pt-2 fixed z-10">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -139,14 +139,14 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/dashboard"
-                  className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
+                  className=" hover:bg-green-500 hover:text-white font-semibold text-lg "
                   >Dashboard</Link>
                 </li>
                 <li>
                   <Link
                     to="/"
                     onClick={logOut}
-                    className=" hover:bg-[#2fa325] hover:text-white font-semibold text-lg "
+                    className=" hover:bg-green-500 hover:text-white font-semibold text-lg "
                   >
                     Logout
                   </Link>
@@ -156,7 +156,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/login"
-              className="btn bg-[#2fa325] text-lg text-white font-medium px-2 md:px-4"
+              className="btn bg-green-500 hover:bg-green-100 text-lg text-white font-medium px-2 md:px-4"
             >
               Join Us
             </Link>

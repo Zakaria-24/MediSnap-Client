@@ -48,12 +48,12 @@ const CategoryDetails = () => {
       </Helmet>
       {/* show category info  */}
       <div className="container mx-auto px-4 sm:px-8">
-        <div className="py-8">
+        <div className="py-10 mt-2">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>
-                  <tr className="bg-green-100">
+                  <tr className="bg-green-300">
                     <th
                       scope="col"
                       className="px-5 py-3 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-semibold"

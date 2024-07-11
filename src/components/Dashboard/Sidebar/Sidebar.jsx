@@ -25,7 +25,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
+      <div className="bg-green-300 text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             {/* <Link to="/">
@@ -65,13 +65,13 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-green-300 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-6 py-2 shadow-lg rounded-lg justify-center items-center bg-green-100 mx-auto">
+            <div className="w-full hidden md:flex px-6 py-2 shadow-lg rounded-lg justify-center items-center bg-green-300 mx-auto">
               {/* <Link to="/">
                 <h1 className="text-3xl font-extrabold">
                   <span className="text-4xl text-green-700">M</span>edi
